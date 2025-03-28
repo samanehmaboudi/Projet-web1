@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome Sur Page Lord Stampee</title>
+   <link rel="stylesheet" href="{{ asset }}/assets/css/auth.css">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Hi, <b>{{ username|e }}</b>. Welcome to our site.</h1>
+
+        {% if privilege == 'admin' %}
+            <p class="admin-message">You are an <strong>Administrator</strong> 🎩</p>
+        {% else %}
+            <p class="user-message">You are a regular user.</p>
+        {% endif %}
+
+        <div style="margin-top: 20px;">
+            <a href="index.php?page=reset-password" class="btn warning">Reset Your Password</a>
+            <a href="index.php?page=logout" class="btn danger">Sign Out of Your Account</a>
+            <a href="index.php?page=accueil" class="btn-accueil">Aller à la page d’accueil</a>
+
+
+
+        </div>
+
+        
+    </div>
+</body>
+</html>

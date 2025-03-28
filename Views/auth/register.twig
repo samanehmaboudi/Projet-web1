@@ -1,0 +1,59 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ 'register-admin' in path ? 'Admin Registration' : 'Sign Up' }}</title>
+    <link rel="stylesheet" href="{{ asset }}/assets/css/auth.css">
+
+</head>
+<body>
+    <div class="container">
+        <h2>{{ 'register-admin' in path ? 'Register as Admin' : 'Sign Up' }}</h2>
+        <p>{{ 'register-admin' in path 
+            ? 'Please fill this form to create an admin account.' 
+            : 'Please fill this form to create a user account.' 
+        }}</p>
+
+        <form action="{{ path }}" method="post">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" class="{{ username_err ? 'input-error' : '' }}" value="{{ username|e }}">
+                {% if username_err %}
+                    <div class="error-message">{{ username_err }}</div>
+                {% endif %}
+            </div>  
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" class="{{ email_err ? 'input-error' : '' }}" value="{{ email|e }}">
+                {% if email_err %}
+                    <div class="error-message">{{ email_err }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" class="{{ password_err ? 'input-error' : '' }}">
+                {% if password_err %}
+                    <div class="error-message">{{ password_err }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" name="confirm_password" class="{{ confirm_password_err ? 'input-error' : '' }}">
+                {% if confirm_password_err %}
+                    <div class="error-message">{{ confirm_password_err }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn" value="Submit">
+                <input type="reset" class="btn warning" value="Reset">
+            </div>
+
+            <p>Already have an account? <a href="index.php?page=login">Login here</a>.</p>
+        </form>
+    </div>
+</body>
+</html>

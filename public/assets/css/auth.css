@@ -1,0 +1,171 @@
+/* ======== GLOBAL STYLES ======== */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+    background: linear-gradient(135deg, #e2ebf0, #f4f6f9);
+    margin: 0;
+    padding: 20px;
+}
+
+/* ======== CONTAINER ======== */
+.container {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 40px;
+    max-width: 500px;
+    margin: 40px auto;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* ======== HEADINGS ======== */
+h1, h2 {
+    color: #2c3e50;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* ======== FORM STYLES ======== */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #fefefe;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0,123,255,0.2);
+    outline: none;
+}
+
+/* ======== ERROR STYLES ======== */
+.input-error {
+    border-color: #dc3545;
+    background-color: #f8d7da;
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+/* ======== SUCCESS & ROLE MESSAGES ======== */
+.success-message {
+    color: #28a745;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.admin-message {
+    color: #c0392b;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.user-message {
+    color: #2980b9;
+    margin-bottom: 20px;
+}
+
+/* ======== BUTTONS ======== */
+.btn {
+    display: inline-block;
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+.btn.warning {
+    background-color: #f0ad4e;
+}
+
+.btn.warning:hover {
+    background-color: #d98c00;
+}
+
+.btn.danger {
+    background-color: #dc3545;
+}
+
+.btn.danger:hover {
+    background-color: #b52a37;
+}
+
+.btn-accueil {
+    display: inline-block;
+    margin-top: 15px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 24px;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-accueil:hover {
+    background-color: #45a049;
+}
+
+
+/* ======== LINKS ======== */
+a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 768px) {
+    .container {
+        padding: 25px;
+        margin: 20px;
+        max-width: 100%;
+    }
+
+    input,
+    .btn {
+        font-size: 15px;
+    }
+}
