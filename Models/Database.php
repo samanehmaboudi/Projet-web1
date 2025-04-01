@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use PDO;
@@ -6,30 +7,33 @@ use PDOException;
 
 class Database
 {
+    // Connexion PDO unique (singleton)
     private static ?PDO $pdo = null;
 
+    /**
+     * Retourne une connexion PDO à la base de données
+     */
     public static function getConnection(): PDO
     {
-        // Check if the connection already exists
+        // Si la connexion n'existe pas encore, on la crée
         if (self::$pdo === null) {
             try {
-                // Attempt to create a new PDO connection
                 self::$pdo = new PDO(
                     'mysql:host=localhost;dbname=lord_stampee;port=3307;charset=utf8',
                     'root',
                     'root',
                     [
-                        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, // Handle errors by throwing exceptions
-                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC // Set default fetch mode to associative array
+                        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
                     ]
                 );
             } catch (PDOException $e) {
-                // Handle error and show a friendly message
-                die("Erreur de connexion : " . $e->getMessage()); // You can replace die() with proper logging or user-friendly message
+                // En cas d’erreur, on affiche un message simple
+                die("Erreur de connexion à la base de données : " . $e->getMessage());
             }
         }
 
-        // Return the existing connection
+        // Retourne la connexion existante
         return self::$pdo;
     }
 }

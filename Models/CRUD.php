@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use PDO;
@@ -8,45 +9,76 @@ class CRUD
     private $pdo;
     private $table;
 
+    /**
+     * Constructeur : initialise la connexion PDO et le nom de la table
+     */
     public function __construct(PDO $pdo, string $table)
     {
         $this->pdo = $pdo;
         $this->table = $table;
     }
 
-    public function all()
+
+    public function unique(string $column, mixed $value): array|false
+{
+    $sql = "SELECT * FROM {$this->table} WHERE {$column} = :value LIMIT 1";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute(['value' => $value]);
+    return $stmt->fetch(\PDO::FETCH_ASSOC);
+}
+
+
+    /**
+     * Récupère tous les enregistrements de la table
+     */
+    public function all(): array
     {
         $stmt = $this->pdo->query("SELECT * FROM {$this->table}");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function find(int $id)
+    /**
+     * Récupère un enregistrement par son ID
+     */
+    public function find(int $id): array|false
     {
         $stmt = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE id = :id");
         $stmt->execute(['id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-
-    public function create(array $data)
+    /**
+     * Crée un nouvel enregistrement dans la table
+     */
+    public function create(array $data): bool
     {
         $columns = implode(', ', array_keys($data));
         $placeholders = ':' . implode(', :', array_keys($data));
-        $stmt = $this->pdo->prepare("INSERT INTO {$this->table} ($columns) VALUES ($placeholders)");
+
+        $sql = "INSERT INTO {$this->table} ($columns) VALUES ($placeholders)";
+        $stmt = $this->pdo->prepare($sql);
         return $stmt->execute($data);
     }
 
- 
-    public function update(int $id, array $data)
+    /**
+     * Met à jour un enregistrement existant par son ID
+     */
+    public function update(int $id, array $data): bool
     {
         $set = implode(', ', array_map(fn($key) => "$key = :$key", array_keys($data)));
+
+        // On ajoute l'ID à la fin du tableau
         $data['id'] = $id;
-        $stmt = $this->pdo->prepare("UPDATE {$this->table} SET $set WHERE id = :id");
+
+        $sql = "UPDATE {$this->table} SET $set WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
         return $stmt->execute($data);
     }
 
-
-    public function delete(int $id)
+    /**
+     * Supprime un enregistrement par son ID
+     */
+    public function delete(int $id): bool
     {
         $stmt = $this->pdo->prepare("DELETE FROM {$this->table} WHERE id = :id");
         return $stmt->execute(['id' => $id]);

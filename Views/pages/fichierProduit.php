@@ -1,4 +1,4 @@
-{% include 'layouts/header.twig' %}
+{% include 'layouts/header.php' %}
 
 <main>
     <div class="contenu-principal">
@@ -195,4 +195,4 @@
     </div>
 </main>
 
-{% include 'layouts/footer.twig' %}
+{% include 'layouts/footer.php' %}

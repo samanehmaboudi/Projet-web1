@@ -1,8 +1,5 @@
-{% extends "layouts/base.twig" %}
+{% include 'layouts/header.php' %}
 
-{% block title %}Utilisateurs{% endblock %}
-
-{% block content %}
 <h2>Gestion des utilisateurs</h2>
 
 <table>
@@ -24,8 +21,9 @@
                     <td>{{ user.email }}</td>
                     <td>{{ user.role|capitalize }}</td>
                     <td>
-                        <a href="index.php?page=edit-user&id={{ user.id }}">Modifier</a> |
-                        <a href="index.php?page=delete-user&id={{ user.id }}" onclick="return confirm('Confirmer la suppression ?')">Supprimer</a>
+                        <a href="{{asset}}/make-admin&id={{ user.id }}">Rendre admin</a>
+                        <a href="{{asset}}/edit-user&id={{ user.id }}">Modifier</a>
+                        <a href="{{asset}}/delete-user&id={{ user.id }}" onclick="return confirm('Confirmer la suppression ?')">Supprimer</a>
                     </td>
                 </tr>
             {% endfor %}
@@ -36,4 +34,5 @@
         {% endif %}
     </tbody>
 </table>
-{% endblock %}
+
+{% include 'layouts/footer.php' %}

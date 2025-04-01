@@ -1,42 +1,47 @@
-<?php 
+<?php
 
 use App\Routes\Route;
-use App\Controllers\HomeController;
-use App\Controllers\StampController;
-use App\Controllers\WelcomeController;
-use App\Controllers\AdminController;
-use App\Controllers\AuthController;
 
-// Route d'accueil principale (home)
-Route::get('/', [new HomeController(), 'index']);
-Route::get('home', [new HomeController(), 'index']);
-Route::get('accueil', [new HomeController(), 'index']);
+// ✅ Page d'accueil
+Route::get('/', 'HomeController@index');
+Route::get('home', 'HomeController@index');
+Route::get('accueil', 'HomeController@index');
 
-// Authentification (tout centralisé dans AuthController)
-Route::get('login', [new AuthController(), 'login']);
-Route::post('login', [new AuthController(), 'login']);
+// ✅ Authentification
+Route::get('login', 'AuthController@login');
+Route::post('login', 'AuthController@login');
 
-Route::get('register', [new AuthController(), 'register']);
-Route::post('register', [new AuthController(), 'register']);
+Route::get('register', 'AuthController@register');
+Route::post('register', 'AuthController@register');
 
-Route::get('register-admin', [new AuthController(), 'registerAdmin']);
-Route::post('register-admin', [new AuthController(), 'registerAdmin']);
+Route::get('register-admin', 'AuthController@registerAdmin');
+Route::post('register-admin', 'AuthController@registerAdmin');
 
-Route::get('logout', [new AuthController(), 'logout']);
+Route::get('logout', 'AuthController@logout');
 
-Route::get('reset-password', [new AuthController(), 'resetPassword']);
-Route::post('reset-password', [new AuthController(), 'resetPassword']);
+Route::get('reset-password', 'AuthController@resetPassword');
+Route::post('reset-password', 'AuthController@resetPassword');
 
-// Pages protégées
-Route::get('welcome', [new WelcomeController(), 'welcome']);
-Route::get('dashboard', [new AdminController(), 'dashboard']);
+// Page après connexion
+Route::get('welcome', 'WelcomeController@welcome');
 
-// Admin - Gestion des utilisateurs
-Route::get('admin-users', [new AdminController(), 'listUsers']);
-Route::get('edit-user', [new AdminController(), 'editUser']);
-Route::post('edit-user', [new AdminController(), 'editUser']);
-Route::get('delete-user', [new AdminController(), 'deleteUser']);
+// Catalogue (stamps)
+Route::get('catalogue', 'StampController@catalogue');
+Route::get('fiche-produit', 'StampController@ficheProduit');
 
-// Catalogue
-Route::get('catalogue', [new StampController(), 'catalogue']);
-Route::get('fiche-produit', [new StampController(), 'ficheProduit']);
+//Administration (privileges requis)
+Route::get('dashboard', 'AdminController@dashboard');
+
+Route::get('admin-users', 'AdminController@listUsers');
+Route::get('edit-user', 'AdminController@editUser');
+Route::post('edit-user', 'AdminController@editUser');
+Route::get('delete-user', 'AdminController@deleteUser');
+
+// Utilisateur connecté (profil)
+Route::get('profil', 'UserController@profil');
+Route::post('update-user', 'UserController@update');
+
+
+Route::get('user/create', 'UserController@create');
+Route::post('user/create', 'UserController@store');
+

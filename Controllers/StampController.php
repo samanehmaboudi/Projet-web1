@@ -2,75 +2,77 @@
 
 namespace App\Controllers;
 
-use Twig\Loader\FilesystemLoader;
-use Twig\Environment;
-use PDO;
-use App\Models\Database; 
+use App\Providers\View;
+use App\Models\Database;
 
 class StampController
-
 {
     private $pdo;
 
-    
     public function __construct()
     {
-       
-        $this->pdo = Database::getConnection(); 
+        // Connexion à la base de données via le modèle Database
+        $this->pdo = Database::getConnection();
     }
 
+    /**
+     * Affiche la page de catalogue des produits (timbres)
+     */
     public function catalogue()
     {
         session_start();
 
+        // Vérification de la session
         if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-            header("Location: index.php?page=login");
+            $_SESSION['flash'] = "Veuillez vous connecter pour accéder au catalogue.";
+            header("Location: /login");
             exit;
         }
 
-        $loader = new FilesystemLoader(__DIR__ . '/../views');
-        $twig = new Environment($loader);
-
-        echo $twig->render('pages/catalogueProduit.twig', [
-            "session" => $_SESSION,
-            "asset" => ASSET
+        // Rendu de la vue du catalogue
+        return View::render('pages/catalogueProduit', [
+            'session' => $_SESSION,
+            'asset' => ASSET
         ]);
     }
 
+    /**
+     * Affiche la fiche détaillée d’un produit (timbre)
+     */
     public function ficheProduit()
-{
-    session_start();
+    {
+        session_start();
 
-    
-    if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-        header("Location: index.php?page=login");
-        exit;
-    }
+        // Vérification de l'utilisateur connecté
+        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+            $_SESSION['flash'] = "Connexion requise pour voir ce timbre.";
+            header("Location: /login");
+            exit;
+        }
 
-    
-    $productId = $_GET['id'] ?? null;
+        // Récupérer l’ID depuis l’URL
+        $productId = $_GET['id'] ?? null;
 
-    if ($productId) {
-      
-        $stmt = $this->pdo->prepare("SELECT * FROM stamp WHERE id = :id");   
+        if (!$productId) {
+            echo "Aucun produit sélectionné.";
+            return;
+        }
+
+        // Requête pour récupérer les données du timbre
+        $stmt = $this->pdo->prepare("SELECT * FROM stamp WHERE id = :id");
         $stmt->execute(['id' => $productId]);
         $produit = $stmt->fetch();
 
-        if ($produit) {
-            $loader = new FilesystemLoader(__DIR__ . '/../views');
-            $twig = new Environment($loader);
-
-            echo $twig->render('pages/fiche-produit.twig', [
-                'produit' => $produit,
-                'asset' => ASSET,
-                'session' => $_SESSION
-            ]);
-        } else {
-            echo "Produit non trouvé";
+        if (!$produit) {
+            echo "Produit non trouvé.";
+            return;
         }
-    } else {
-        echo "Aucun produit sélectionné";
-    }
-   }
 
+        // Rendu de la fiche produit
+        return View::render('pages/fiche-produit', [
+            'produit' => $produit,
+            'asset' => ASSET,
+            'session' => $_SESSION
+        ]);
+    }
 }

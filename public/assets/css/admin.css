@@ -1,0 +1,23 @@
+.admin-header, .admin-footer {
+    background-color: #4a3f2d;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+}
+
+.admin-header nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.admin-header nav ul li a {
+    color: #b0975c;
+    font-weight: bold;
+    text-decoration: none;
+}
+.admin-header nav ul li a:hover {
+    text-decoration: underline;
+}

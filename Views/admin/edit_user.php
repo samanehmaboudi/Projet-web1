@@ -1,11 +1,9 @@
-{% extends "layouts/base.twig" %}
+{% include 'layouts/header.php' %}
 
-{% block title %}Modifier utilisateur{% endblock %}
-
-{% block content %}
+<main class="container">
     <h2>Modifier l’utilisateur</h2>
 
-    <form method="post" action="">
+    <form method="post">
         <div class="form-group">
             <label for="name">Nom :</label>
             <input type="text" id="name" name="name" value="{{ user.name }}" required>
@@ -21,7 +19,7 @@
             <select name="role" id="role">
                 {% for privilege in privileges %}
                     <option value="{{ privilege.privilege }}"
-                        {% if privilege.privilege == user.role %}selected{% endif %}>
+                        {% if privilege.privilege = user.role %}selected{% endif %}>
                         {{ privilege.privilege|capitalize }}
                     </option>
                 {% endfor %}
@@ -30,7 +28,9 @@
 
         <div class="form-group">
             <button type="submit">Enregistrer</button>
-            <a href="index.php?page=admin-users">Retour</a>
+            <a href="{{asset}}/admin-users">Retour</a>
         </div>
     </form>
-{% endblock %}
+</main>
+
+{% include 'layouts/footer.php' %}

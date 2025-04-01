@@ -58,15 +58,16 @@
         <!-- Connexion / Déconnexion -->
         <div class="footer-connexion">
             {% if session.loggedin %}
-                <a href="index.php?page=logout" class="btn-connexion">Déconnexion</a>
+                <a href="{{ asset }}/logout" class="btn-connexion">Déconnexion</a>
             {% else %}
-                <a href="index.php?page=login" class="btn-connexion">Se Connecter</a>
+                <a href="{{ asset }}/login" class="btn-connexion">Se Connecter</a>
             {% endif %}
         </div>
     </div>
 
     <div class="footer-bas">
-        <p>Copyright © 2025 Lord Stampee. Tous droits réservés.</p>
+    <p>Copyright © {{ "now"|date("Y") }} Lord Stampee. Tous droits réservés.</p>
+
     </div>
 </footer>
 

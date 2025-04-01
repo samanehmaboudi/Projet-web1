@@ -1,4 +1,4 @@
 <?php
-define('BASE', '/projet-web-Lode-stampee-sprint1');
+define('BASE', '/MVC-stampee');
 define('ASSET',  BASE . '/public');
 

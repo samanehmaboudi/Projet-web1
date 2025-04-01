@@ -1,32 +1,29 @@
-<?php 
+<?php
+
 namespace App\Controllers;
 
-use Twig\Loader\FilesystemLoader;
-use Twig\Environment;
+use App\Providers\View;
 
 class HomeController
 {
     public function index()
     {
-        session_start();
-
-        // Redirection si l'utilisateur n'est pas connecté
-        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-            header("Location: index.php?page=login");
-            exit;
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
         }
+        
 
-        // Charger Twig pour afficher la vue
-        $loader = new FilesystemLoader(__DIR__ . '/../views');
-        $twig = new Environment($loader);
+        // Vérifier si l'utilisateur est connecté
+        // if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+        //     $_SESSION['flash'] = "Veuillez vous connecter pour accéder à la page d’accueil.";
+        //     header("Location: /login");
+        //     exit;
+        // }
 
-        // Passer les données nécessaires à la vue
-        $data = [
-            "asset" => ASSET,
-            "session" => $_SESSION
-        ];
-
-        // Rendre la vue pageAccueil.twig
-        echo $twig->render('pages/pageAccueil.twig', $data);
+        // Rendu de la vue avec les données de session
+        return View::render('pages/pageAccueil', [
+            'title' => 'Accueil',
+        ]);
+        
     }
 }

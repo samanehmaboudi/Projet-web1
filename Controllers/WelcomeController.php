@@ -1,52 +1,43 @@
-<?php 
+<?php
+
 namespace App\Controllers;
 
-use Twig\Loader\FilesystemLoader;
-use Twig\Environment;
+use App\Providers\View;
 
 class WelcomeController
 {
+    /**
+     * Affiche la page de bienvenue si l’utilisateur est connecté
+     */
     public function welcome()
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
     
         if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-            header("Location: index.php?page=login");
+            header("Location: /login");
             exit;
         }
     
-        // Récupérer l'email de l'utilisateur
-        $username = $_SESSION["username"];
-        $privilege = $_SESSION["privilege"];  // Le privilège de l'utilisateur (user ou admin)
-    
-        $loader = new FilesystemLoader(__DIR__ . '/../views/auth');
-        $twig = new Environment($loader, [
-            'cache' => false  // Désactivation du cache pendant le développement
-        ]);
-    
-        // Données à afficher dans la vue
-        $data = [
+        return View::render('auth/welcome', [
             'username' => $_SESSION["username"],
             'privilege' => $_SESSION["privilege"],
-            'asset' => '/projet-web-Lode-stampee/public'
-        ];
-        
-    
-        echo $twig->render('welcome.twig', $data);
+            'asset' => ASSET
+        ]);
     }
     
 
-
+    /**
+     * Déconnecte l’utilisateur et redirige vers la page de login
+     */
     public function logout()
     {
-        // Détruire la session à la déconnexion
         session_start();
         $_SESSION = [];
         session_destroy();
-    
-        // Rediriger vers la page de login après déconnexion
-        header("Location: index.php?page=login");
+
+        header("Location: /login");
         exit;
     }
-
 }

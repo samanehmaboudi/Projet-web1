@@ -1,4 +1,4 @@
-{% include 'layouts/header.twig' %}
+{% include 'layouts/header.php' %}
 
 <main>
     <div class="aaa">
@@ -161,7 +161,7 @@
 
                     <!-- Produit 1 -->
                     <article class="carte">
-                        <a href="index.php?page=fiche-produit&id=1" class="lien-produit">Voir plus de détails</a>
+                        <a href="{{ base }}/fiche-produit&id=1" class="lien-produit">Voir plus de détails</a>
                             <figure class="carte-image">
                                 <img src="{{ asset }}/assets/images/photo-GB-1852.jpg" alt="GOLD COAST ">
                             </figure>
@@ -375,4 +375,4 @@
     </div>
 </main>
 
-{% include 'layouts/footer.twig' %}
+{% include 'layouts/footer.php' %}

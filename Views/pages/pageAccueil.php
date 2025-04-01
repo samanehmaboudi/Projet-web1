@@ -1,17 +1,17 @@
-{% include 'layouts/header.twig' %}
+{% include 'layouts/header.php' %}
 
 
 <main>
     {% if session.privilege == 'admin' %}
         <div class="admin-message">
-            <h2>Bienvenue, Admin {{ session.username }} 👑</h2>
+            <h2>Bienvenue, Admin {{ session.username }} </h2>
             <p>Accédez à l’espace de gestion :</p>
-            <a href="index.php?page=dashboard" class="btn">Aller au tableau de bord</a>
+            <a href="{{ base }}/dashboard" class="btn">Aller au tableau de bord</a>
         </div>
     {% else %}
         <div class="user-message">
-            <h2>Bienvenue {{ session.username }} 👋</h2>
-            <p>Découvrez les enchères en cours et explorez le catalogue !</p>
+ 
+
         </div>
     {% endif %}
     
@@ -72,4 +72,4 @@
 
 </main>
 
-{% include 'layouts/footer.twig' %}
+{% include 'layouts/footer.php' %}

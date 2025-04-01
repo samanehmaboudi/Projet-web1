@@ -50,19 +50,19 @@ class ComposerStaticInit6c9abbb62326e4d13dc24dc4996b1442
         ),
         'App\\Routes\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/routes',
+            0 => __DIR__ . '/../..' . '/Routes',
         ),
         'App\\Providers\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/providers',
+            0 => __DIR__ . '/../..' . '/Providers',
         ),
         'App\\Models\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/models',
+            0 => __DIR__ . '/../..' . '/Models',
         ),
         'App\\Controllers\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/controllers',
+            0 => __DIR__ . '/../..' . '/Controllers',
         ),
     );
 

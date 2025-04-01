@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Lord Stampee{% endblock %}</title>
+    <title>{{ title ?? 'Lord Stampee' }}</title>
 
     <!-- Feuilles de styles -->
     <link rel="stylesheet" href="{{ asset }}/assets/css/main.css">
+    <link rel="stylesheet" href="{{ asset }}/assets/css/admin.css">
     <link rel="stylesheet" href="{{ asset }}/assets/css/banniere.css">
     <link rel="stylesheet" href="{{ asset }}/assets/css/a-propos.css">
     <link rel="stylesheet" href="{{ asset }}/assets/css/footer.css">
+   
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -17,7 +19,7 @@
 
 <body>
 
-<header class="conteneur-en-tete">
+<header class="conteneur-en-tete ">
     <div class="logo">
         <img src="{{ asset }}/assets/images/logo.png" alt="Logo Lord Stampee">
         <div class="texte-logo">
@@ -38,13 +40,13 @@
             <li><a href="#">Blog</a></li>
 
             {% if session.privilege == 'admin' %}
-                <li><a href="index.php?page=dashboard">Espace Admin</a></li>
+                <li><a href="{{ base }}/dashboard">Espace Admin</a></li>
             {% endif %}
 
             {% if session.loggedin %}
-                <li><a href="index.php?page=logout" class="se-connecter">Déconnexion</a></li>
+                <li><a href="{{ base }}/logout" class="se-connecter">Déconnexion</a></li>
             {% else %}
-                <li><a href="index.php?page=login" class="se-connecter">Se Connecter</a></li>
+                <li><a href="{{ base }}/login" class="se-connecter">Se Connecter</a></li>
             {% endif %}
             
             <li class="changer-langue">
@@ -108,11 +110,11 @@
             </ul>
         </li>
         {% if session.loggedin %}
-        <li><a href="index.php?page=home">Accueil</a></li>
+        <li><a href="{{ base }}/home">Accueil</a></li>
         {% endif %}
 
 
-        <li><a href="index.php?page=catalogue">Catalogue</a></li>
+        <li><a href="{{ base }}/catalogue">Catalogue</a></li>
         <li><a href="#">À propos</a></li>
         <li class="menu-deroule">
             <a class="declencheur-menu" href="#">Collection et boutique</a>
@@ -131,10 +133,10 @@
                     <li><a href="#">Notifications</a></li>
                     <li><a href="#">Paiement sécurisé</a></li>
                     <li><a href="#">Favoris</a></li>
-                    <li><a href="index.php?page=logout">Déconnexion</a></li>
+                    <li><a href="{{ base }}/logout">Déconnexion</a></li>
                 {% else %}
-                    <li><a href="index.php?page=login">Connexion</a></li>
-                    <li><a href="index.php?page=register">Inscription</a></li>
+                    <li><a href="{{ base }}/login">Connexion</a></li>
+                    <li><a href="{{ base }}/register">Inscription</a></li>
                 {% endif %}
             </ul>
         </li>

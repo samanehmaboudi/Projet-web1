@@ -1,175 +1,149 @@
-/* ======== GLOBAL STYLES ======== */
+/* Base */
 body {
-    font-family: 'Roboto', Arial, sans-serif;
-    font-size: 16px;
-    color: #333;
-    background: linear-gradient(135deg, #e2ebf0, #f4f6f9);
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #1d2540; 
+    color: #fff; 
 }
 
-/* ======== CONTAINER ======== */
+/* Navigation pour authentification */
+nav {
+    background-color: #a88d5e;
+    padding: 15px 0;
+}
+
+.nav-auth {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.nav-auth li a {
+    text-decoration: none;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.nav-auth li a:hover {
+    background-color: #efeeea;
+    color: #4a3f2d;
+}
+
+/* Container */
 .container {
-    background-color: white;
-    border: 1px solid #ddd;
-    padding: 40px;
-    max-width: 500px;
-    margin: 40px auto;
-    border-radius: 12px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin: 60px auto;
+    background: #fff;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    color: #222; 
 }
 
-/* ======== HEADINGS ======== */
+/* Headings */
 h1, h2 {
-    color: #2c3e50;
-    font-weight: 600;
     text-align: center;
-    margin-bottom: 25px;
+    color: #1b2a49;
+    margin-bottom: 20px;
 }
 
-/* ======== FORM STYLES ======== */
+/* Form styles */
 .form-group {
     margin-bottom: 20px;
-    margin-top: 20px;
 }
 
 label {
     display: block;
-    font-weight: 500;
-    margin-bottom: 8px;
-    color: #444;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 input[type="text"],
 input[type="email"],
 input[type="password"] {
     width: 100%;
-    padding: 12px 15px;
+    padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    background-color: #fefefe;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    border-radius: 5px;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0,123,255,0.2);
-    outline: none;
-  
-}
-
-/* ======== ERROR STYLES ======== */
 .input-error {
-    border-color: #dc3545;
-    background-color: #f8d7da;
+    border-color: #cc0000;
 }
 
 .error-message {
-    color: #dc3545;
-    font-size: 14px;
-    margin-top: 6px;
+    color: #cc0000;
+    font-size: 0.9em;
+    margin-top: 5px;
 }
 
-/* ======== SUCCESS & ROLE MESSAGES ======== */
 .success-message {
-    color: #28a745;
-    font-size: 14px;
-    margin-top: 10px;
+    color: green;
+    font-size: 0.9em;
+    margin-top: 5px;
 }
 
-.admin-message {
-    color: #c0392b;
-    font-weight: 600;
-    margin-bottom: 20px;
+.alert {
+    padding: 10px;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+    border-radius: 5px;
 }
 
-.user-message {
-    color: #2980b9;
-    margin-bottom: 20px;
-}
-
-/* ======== BUTTONS ======== */
-.btn {
+/* Boutons */
+.btn,
+.btn.warning,
+.btn.danger,
+.btn-connexion {
     display: inline-block;
     width: 100%;
-    padding: 12px 20px;
-    background-color: #007bff;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
+    background-color: #b0975c;
+    color: #fff;
+    padding: 10px;
     text-align: center;
-    transition: background-color 0.3s, transform 0.2s ease;
-    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    text-decoration: none;
+    transition: background 0.3s;
 }
 
-.btn:hover {
-    background-color: #0056b3;
-    transform: translateY(-1px);
+.btn:hover,
+.btn-connexion:hover {
+    background-color: #a0864f;
 }
 
 .btn.warning {
     background-color: #f0ad4e;
-    margin-top: 20px;
-}
-
-.btn.warning:hover {
-    background-color: #d98c00;
 }
 
 .btn.danger {
-    background-color: #dc3545;
+    background-color: #d9534f;
 }
 
-.btn.danger:hover {
-    background-color: #b52a37;
-}
-
-.btn-accueil {
-    display: inline-block;
-    margin-top: 15px;
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 24px;
-    text-decoration: none;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-.btn-accueil:hover {
-    background-color: #45a049;
-}
-
-
-/* ======== LINKS ======== */
+/* Liens */
 a {
-    color: #007bff;
+    color: #222;
     text-decoration: none;
-    transition: color 0.2s;
 }
 
 a:hover {
     text-decoration: underline;
-    color: #0056b3;
+    color: #b0975c;
 }
 
-/* ======== RESPONSIVE ======== */
-@media (max-width: 768px) {
-    .container {
-        padding: 25px;
-        margin: 20px;
-        max-width: 100%;
-    }
-
-    input,
-    .btn {
-        font-size: 15px;
-    }
+/* Footer Auth */
+.auth-footer {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 0.9em;
+    color: #ccc;
 }
