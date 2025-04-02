@@ -12,7 +12,7 @@ class View
      */
     static public function render($template, $data = [])
     {
-        // Ne pas ajouter .twig automatiquement, on s'attend à des fichiers .php contenant du Twig
+        
         $loader = new FilesystemLoader(__DIR__ . '/../Views');
         $twig = new Environment($loader, [
             'cache' => false,
@@ -21,8 +21,8 @@ class View
 
         // Variables globales accessibles partout
         $twig->addGlobal('asset', ASSET);   
-        $twig->addGlobal('base', BASE);     // L’URL de base
-        $twig->addGlobal('session', $_SESSION); // Données session
+        $twig->addGlobal('base', BASE);    
+        $twig->addGlobal('session', $_SESSION); 
 
         // Vérifie si l’utilisateur est un invité
         $guest = true;
@@ -34,7 +34,7 @@ class View
         }
         $twig->addGlobal('guest', $guest);
 
-       
+      
         echo $twig->render($template.".php", $data);
     }
 

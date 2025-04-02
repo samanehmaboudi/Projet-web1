@@ -11,7 +11,7 @@ class StampController
 
     public function __construct()
     {
-        // Connexion à la base de données via le modèle Database
+       
         $this->pdo = Database::getConnection();
     }
 
@@ -22,23 +22,21 @@ class StampController
     {
         session_start();
 
-        // Vérification de la session
+        
         if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             $_SESSION['flash'] = "Veuillez vous connecter pour accéder au catalogue.";
             header("Location: /login");
             exit;
         }
 
-        // Rendu de la vue du catalogue
+       
         return View::render('pages/catalogueProduit', [
             'session' => $_SESSION,
             'asset' => ASSET
         ]);
     }
 
-    /**
-     * Affiche la fiche détaillée d’un produit (timbre)
-     */
+    
     public function ficheProduit()
     {
         session_start();

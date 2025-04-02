@@ -28,7 +28,7 @@
 
         <div class="form-group">
             <button type="submit">Enregistrer</button>
-            <a href="{{asset}}/admin-users">Retour</a>
+            <a href="{{ asset }}/admin-users">Retour</a>
         </div>
     </form>
 </main>

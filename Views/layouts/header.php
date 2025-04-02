@@ -36,12 +36,16 @@
 
     <nav class="navigation-haut">
         <ul>
-            <li><a href="#">Devenir Membre</a></li>
+            <!-- <li><a href="#">Devenir Membre</a></li> -->
             <li><a href="#">Blog</a></li>
+            {% if session.privilege == 'superadmin' %}
+            <li><a href="{{ base }}/superadmin-dashboard">SuperAdmin Panel</a></li>
+            {% endif %}
 
             {% if session.privilege == 'admin' %}
-                <li><a href="{{ base }}/dashboard">Espace Admin</a></li>
+            <li><a href="{{ base }}/dashboard">Espace Admin</a></li>
             {% endif %}
+
 
             {% if session.loggedin %}
                 <li><a href="{{ base }}/logout" class="se-connecter">Déconnexion</a></li>

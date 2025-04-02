@@ -7,24 +7,24 @@ use App\Models\Database;
 use App\Models\CRUD;
 use App\Providers\View;
 
+
 class AdminController
 {
-    // Tableau de bord
+    
     public function dashboard()
-    {
+{
+    if (session_status() === PHP_SESSION_NONE) {
         session_start();
-
-        if (!isset($_SESSION['loggedin']) || $_SESSION['privilege_id'] != 2) {
-            $_SESSION['flash'] = "Accès refusé.";
-            return View::redirect('login');
-        }
-
-        return View::render("admin/dashboard", [
-            'session' => $_SESSION,
-        ]);
     }
 
-    // Liste des utilisateurs
+    if (!isset($_SESSION['loggedin']) || $_SESSION['privilege'] !== 'admin') {
+        return View::redirect('login');
+    }
+
+    return View::render('admin/dashboard');
+}
+
+   
     public function listUsers()
     {
         session_start();
@@ -42,12 +42,12 @@ class AdminController
         ");
         $users = $stmt->fetchAll();
 
-        return View::render("admin/users", [
+        return View::render("admin-users", [
             'users' => $users,
         ]);
     }
 
-    // Modifier un utilisateur
+    
     public function editUser()
     {
         session_start();
@@ -86,7 +86,7 @@ class AdminController
         ]);
     }
 
-    // Rendre admin
+
     public function makeAdmin()
     {
         session_start();
@@ -106,7 +106,7 @@ class AdminController
         return View::redirect('admin-users');
     }
 
-    // Supprimer un utilisateur
+   
     public function deleteUser()
     {
         session_start();

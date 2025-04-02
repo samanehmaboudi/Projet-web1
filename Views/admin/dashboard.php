@@ -1,6 +1,8 @@
+
+
 {% include 'layouts/header.php' %}
 
-<main class="container">
+<main class="container-dashboard ">
     <h2>Tableau de bord Administrateur</h2>
     <p>Bienvenue {{ session.username }}. Ici, vous pouvez gérer les utilisateurs, enchères, et plus.</p>
 

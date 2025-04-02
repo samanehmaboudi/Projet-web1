@@ -6,9 +6,7 @@ use App\Providers\View;
 
 class WelcomeController
 {
-    /**
-     * Affiche la page de bienvenue si l’utilisateur est connecté
-     */
+   
     public function welcome()
     {
         if (session_status() === PHP_SESSION_NONE) {

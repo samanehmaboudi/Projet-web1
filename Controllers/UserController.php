@@ -9,23 +9,21 @@ use App\Providers\Validator;
 
 class UserController
 {
-    /**
-     * Affiche le profil de l'utilisateur connecté
-     */
+    
     public function profil()
     {
         session_start();
 
-        // Vérifie si l'utilisateur est connecté
+        
         if (!isset($_SESSION['user_id'])) {
             return View::redirect('login');
         }
 
-        // Récupère les données de l'utilisateur connecté
+        
         $userModel = new User();
         $user = $userModel->find($_SESSION['user_id']);
 
-        // Affiche la vue du profil
+        
         return View::render('user/profil', [
             'user' => $user
         ]);
@@ -64,9 +62,7 @@ class UserController
         }
     }
 
-    /**
-     * Met à jour les infos du profil (nom et email)
-     */
+    
     public function update()
     {
         session_start();
@@ -83,7 +79,7 @@ class UserController
                 'email' => trim($_POST['email'])
             ];
 
-            // Met à jour l'utilisateur connecté
+            
             $userModel->update($_SESSION['user_id'], $updatedData);
 
             return View::redirect('profil');

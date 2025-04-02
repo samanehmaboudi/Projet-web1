@@ -14,7 +14,7 @@ class Validator
     /**
      * Définir un champ à valider
      */
-    public function field(string $key, mixed $value, string $name = null): static
+    public function field( $key, $value, $name = null): static
     {
         $this->key = $key;
         $this->value = $value;

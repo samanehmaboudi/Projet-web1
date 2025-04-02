@@ -2,12 +2,12 @@
 
 use App\Routes\Route;
 
-// ✅ Page d'accueil
+//Page d'accueil
 Route::get('/', 'HomeController@index');
 Route::get('home', 'HomeController@index');
 Route::get('accueil', 'HomeController@index');
 
-// ✅ Authentification
+// Authentification
 Route::get('login', 'AuthController@login');
 Route::post('login', 'AuthController@login');
 
@@ -31,6 +31,7 @@ Route::get('fiche-produit', 'StampController@ficheProduit');
 
 //Administration (privileges requis)
 Route::get('dashboard', 'AdminController@dashboard');
+Route::get('superadmin-dashboard', 'SuperAdminController@dashboard');
 
 Route::get('admin-users', 'AdminController@listUsers');
 Route::get('edit-user', 'AdminController@editUser');
