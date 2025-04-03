@@ -3,56 +3,43 @@
 namespace App\Controllers;
 
 use App\Models\User;
-use App\Models\Database;
-use App\Models\CRUD;
+use App\Models\Privilege;
 use App\Providers\View;
-
+use App\Providers\Database;
 
 class AdminController
 {
-    
     public function dashboard()
-{
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (!isset($_SESSION['loggedin']) || $_SESSION['privilege_id'] < 2) {
+            return View::redirect('login');
+        }
+
+        return View::render('admin/dashboard');
     }
 
-    if (!isset($_SESSION['loggedin']) || $_SESSION['privilege'] !== 'admin') {
-        return View::redirect('login');
-    }
-
-    return View::render('admin/dashboard');
-}
-
-   
     public function listUsers()
     {
-        session_start();
-
-        if (!isset($_SESSION['loggedin']) || $_SESSION['privilege_id'] != 2) {
+        if (!isset($_SESSION['loggedin']) || $_SESSION['privilege_id'] < 2) {
             $_SESSION['flash'] = "Accès refusé.";
             return View::redirect('login');
         }
 
-        $pdo = Database::getConnection();
-        $stmt = $pdo->query("
-            SELECT u.id, u.name, u.email, p.privilege AS role
-            FROM User u
-            LEFT JOIN Privilege p ON u.privilege_id = p.id
-        ");
-        $users = $stmt->fetchAll();
+        $model = new User();
+        $users = $model->getAllWithPrivilege();
 
-        return View::render("admin-users", [
+        return View::render("admin/admin-users", [
             'users' => $users,
         ]);
     }
 
-    
     public function editUser()
     {
-        session_start();
-
-        if (!isset($_SESSION['loggedin']) || $_SESSION['privilege_id'] != 2) {
+        if (!isset($_SESSION['loggedin']) || $_SESSION['privilege_id'] < 2) {
             $_SESSION['flash'] = "Accès refusé.";
             return View::redirect('login');
         }
@@ -63,12 +50,11 @@ class AdminController
             return;
         }
 
-        $pdo = Database::getConnection();
-        $userCrud = new CRUD($pdo, 'User');
-        $privCrud = new CRUD($pdo, 'Privilege');
+        $userModel = new User();
+        $privilegeModel = new Privilege();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $userCrud->update($id, [
+            $userModel->update($id, [
                 'name' => $_POST['name'],
                 'email' => $_POST['email'],
                 'privilege_id' => $_POST['role']
@@ -77,8 +63,8 @@ class AdminController
             return View::redirect('admin-users');
         }
 
-        $user = $userCrud->find($id);
-        $privileges = $privCrud->all();
+        $user = $userModel->findById($id);
+        $privileges = $privilegeModel->getAll();
 
         return View::render("admin/edit-user", [
             'user' => $user,
@@ -86,41 +72,33 @@ class AdminController
         ]);
     }
 
-
     public function makeAdmin()
     {
-        session_start();
-
-        if (!isset($_SESSION['loggedin']) || $_SESSION['privilege_id'] != 2) {
+        if (!isset($_SESSION['loggedin']) || $_SESSION['privilege_id'] < 2) {
             $_SESSION['flash'] = "Accès refusé.";
             return View::redirect('login');
         }
 
         $id = $_GET['id'] ?? null;
         if ($id) {
-            $pdo = Database::getConnection();
-            $userCrud = new CRUD($pdo, 'User');
-            $userCrud->update($id, ['privilege_id' => 2]);
+            $model = new User();
+            $model->update($id, ['privilege_id' => 2]);
         }
 
         return View::redirect('admin-users');
     }
 
-   
     public function deleteUser()
     {
-        session_start();
-
-        if (!isset($_SESSION['loggedin']) || $_SESSION['privilege_id'] != 2) {
+        if (!isset($_SESSION['loggedin']) || $_SESSION['privilege_id'] < 2) {
             $_SESSION['flash'] = "Accès refusé.";
             return View::redirect('login');
         }
 
         $id = $_GET['id'] ?? null;
         if ($id) {
-            $pdo = Database::getConnection();
-            $userCrud = new CRUD($pdo, 'User');
-            $userCrud->delete($id);
+            $model = new User();
+            $model->delete($id);
         }
 
         return View::redirect('admin-users');

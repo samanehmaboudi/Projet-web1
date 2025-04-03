@@ -1,26 +1,28 @@
-{% include 'layouts/header.php' %}
+{% include 'layouts/header-auth.php' %}
 
-<div class="container">
-    <h2>Liste des utilisateurs</h2>
+<main class="admin-users-container">
+    <h2 class="page-title">Liste des utilisateurs</h2>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in users %}
+    <div class="table-responsive">
+        <table class="user-table">
+            <thead>
                 <tr>
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.role }}</td>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Rôle</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td data-label="Nom" class="user-cell">{{ user.name }}</td>
+                        <td data-label="Email" class="user-cell">{{ user.email }}</td>
+                        <td data-label="Rôle" class="user-cell">{{ user.role }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
 
-{% include 'layouts/footer.php' %}
+{% include 'layouts/footer-auth.php' %}

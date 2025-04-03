@@ -6,6 +6,7 @@ use App\Routes\Route;
 Route::get('/', 'HomeController@index');
 Route::get('home', 'HomeController@index');
 Route::get('accueil', 'HomeController@index');
+Route::get('stamps', 'StampController@index'); 
 
 // Authentification
 Route::get('login', 'AuthController@login');
@@ -29,6 +30,7 @@ Route::get('welcome', 'WelcomeController@welcome');
 Route::get('catalogue', 'StampController@catalogue');
 Route::get('fiche-produit', 'StampController@ficheProduit');
 
+
 //Administration (privileges requis)
 Route::get('dashboard', 'AdminController@dashboard');
 Route::get('superadmin-dashboard', 'SuperAdminController@dashboard');
@@ -45,4 +47,16 @@ Route::post('update-user', 'UserController@update');
 
 Route::get('user/create', 'UserController@create');
 Route::post('user/create', 'UserController@store');
+
+
+
+Route::get('create-stamp', 'StampController@create');
+Route::post('create-stamp', 'StampController@store');
+Route::get('create-stamp', 'StampController@create');
+Route::post('create-stamp', 'StampController@store');
+Route::get('edit-stamp', 'StampController@edit');
+Route::post('edit-stamp', 'StampController@update');
+Route::get('delete-stamp', 'StampController@delete');
+Route::get('show-stamp', 'StampController@show');
+
 

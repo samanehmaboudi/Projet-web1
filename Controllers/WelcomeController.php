@@ -17,7 +17,7 @@ class WelcomeController
             header("Location: /login");
             exit;
         }
-    
+
         return View::render('auth/welcome', [
             'username' => $_SESSION["username"],
             'privilege' => $_SESSION["privilege"],
@@ -26,9 +26,7 @@ class WelcomeController
     }
     
 
-    /**
-     * Déconnecte l’utilisateur et redirige vers la page de login
-     */
+   
     public function logout()
     {
         session_start();

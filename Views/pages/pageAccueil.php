@@ -20,7 +20,7 @@
             <div class="banniere-contenu">
                 <h1>Découvrez les timbres rares et historiques</h1>
                 <p>Rejoignez la plus grande communauté de collectionneurs et participez aux enchères exclusives.</p>
-                <a href="index.php?page=catalogue" class="btn btn-large">Voir le Catalogue</a>
+                <a href="{{ base }}/catalogue" class="btn btn-large">Voir le Catalogue</a>
             </div>
         </section>
 
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="categorie">
-                <img src="/{{ asset }}/assets/images/page-accueil/SG_Stamps_high_res_05.png" alt="Timbres Commonwealth">
+                <img src="{{ asset }}/assets/images/page-accueil/SG_Stamps_high_res_05.png" alt="Timbres Commonwealth">
                 <div class="overlay">
                     <h2>Commonwealth</h2>
                     <a href="#">Explorer</a>

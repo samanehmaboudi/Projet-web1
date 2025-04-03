@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>{{ title|default('Authentification') }}</title>
     <link rel="stylesheet" href="{{ asset }}/assets/css/auth.css">
+    <link rel="stylesheet" href="{{ asset }}/assets/css/admin.css">
 </head>
 <body>
 

@@ -50,10 +50,74 @@
 }
 
 
+.admin-users-container {
+    padding: 2rem;
+    max-width: 900px;
+    margin: auto;
+}
 
+.page-title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
 
+.table-responsive {
+    overflow-x: auto;
+}
 
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
 
+.user-table th,
+.user-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+.user-table th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+}
+
+.user-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+@media (max-width: 768px) {
+    .user-table thead {
+        display: none;
+    }
+
+    .user-table tr {
+        display: block;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid #ccc;
+    }
+
+    .user-table td {
+        display: block;
+        text-align: right;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    .user-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        top: 1rem;
+        font-weight: bold;
+        text-align: left;
+    }
+}
 
 .admin-header, .admin-footer {
     background-color: #4a3f2d;

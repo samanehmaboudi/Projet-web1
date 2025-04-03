@@ -159,215 +159,27 @@
                 <h2>Collection de Timbres</h2>
                 <div class="catalogue-grid">
 
-                    <!-- Produit 1 -->
-                    <article class="carte">
-                        <a href="{{ base }}/fiche-produit&id=1" class="lien-produit">Voir plus de détails</a>
+                {% for stamp in stamps %}
+                        <article class="carte">
+                            <!-- <a href="{{ base }}/fiche-produit?id={{ stamp.id }}" class="lien-produit">Voir plus de détails</a> -->
                             <figure class="carte-image">
-                                <img src="{{ asset }}/assets/images/photo-GB-1852.jpg" alt="GOLD COAST ">
+                                <img src="{{ asset }}/{{ stamp.image_url }}" alt="{{ stamp.name }}">
                             </figure>
                             <div class="carte-details">
-                                <h3 class="carte-titre">GOLD COAST 107 NON DÉTACHÉ ** EXCELLENT ÉTAT - PNH</h3>
-                                <p class="carte-prix">$175.00</p>
-                            </div>
-                        </a>
-                        <nav class="carte-actions">
-                            <button aria-label="Ajouter aux favoris"><i class="fa-regular fa-heart"></i></button>
-                            <button aria-label="Voir plus de détails"><i class="fa-solid fa-arrow-right"></i></button>
-                        </nav>
-                    </article>
+                                <h3 class="carte-titre">{{ stamp.name }}</h3>
+                                <p class="carte-prix">{{ stamp.price | number_format(2, '.', ' ') }} $</p>
 
-                    <!-- Produit 2 -->
-                    <article class="carte">
-                        <span class="etiquette stock-info">Seulement 1 en stock</span>
-                        <figure class="carte-image">
-                            <img src="{{ asset }}/assets/images/img-catalogue/timbre-du-Canada-jacques-cartier.jpg"
-                                alt="Timbre Jacques Cartier">
-                        </figure>
-                        <div class="carte-details">
-                            <h3 class="carte-titre">Timbre du Canada #7 - Jacques Cartier</h3>
-                            <p class="carte-prix">$499.00</p>
+                            </div>
                             <nav class="carte-actions">
-                                <button aria-label="Ajouter aux favoris"><i
-                                        class="fa-regular fa-heart"></i></button>
-                                <button aria-label="Voir plus de détails"><i
-                                        class="fa-solid fa-arrow-right"></i></button>
+                                <button aria-label="Ajouter aux favoris"><i class="fa-regular fa-heart"></i></button>
+                                <button class="btn-details" onclick="window.location.href='{{ base }}/fiche-produit?id={{ stamp.id }}'">
+                                   <i class="fa-solid fa-arrow-right"></i>
+                                </button>
                             </nav>
-                        </div>
-                    </article>
-
-                                         <article class="carte">
-                            <span class="etiquette stock-info">Seulement 1 en stock</span>
-                            <figure class="carte-image">
-                                <img src="{{ asset }}/assets/images/img-catalogue/italy-stamp-237-monte-cassino-abbey-1929.jpg"
-                                    alt="Timbre ITALY ">
-                            </figure>
-                            <div class="carte-details">
-                                <h3 class="carte-titre">Timbre ITALY #237 - Abbaye du Mont Cassin (1929)</h3>
-                                <p class="carte-prix">$799.00</p>
-                                <nav class="carte-actions">
-                                    <button aria-label="Ajouter aux favoris"><i
-                                            class="fa-regular fa-heart"></i></button>
-                                    <button aria-label="Voir plus de détails"><i
-                                            class="fa-solid fa-arrow-right"></i></button>
-                                </nav>
-                            </div>
                         </article>
-
-                        <article class="carte">
-                            <figure class="carte-image">
-                                <img src="{{ asset }}/assets/images/img-catalogue/Timbre-canada-reine-victoria.jpg"
-                                    alt="Timbre Reine Victoria">
-                            </figure>
-                            <div class="carte-details">
-                                <h3 class="carte-titre">Timbre du Canada #9 - Reine Victoria</h3>
-                                <p class="carte-prix">$1225.00</p>
-                                <p class="offre">Ou meilleure offre</p>
-                                <nav class="carte-actions">
-                                    <button aria-label="Ajouter aux favoris"><i
-                                            class="fa-regular fa-heart"></i></button>
-                                    <button aria-label="Voir plus de détails"><i
-                                            class="fa-solid fa-arrow-right"></i></button>
-                                </nav>
-                            </div>
-                        </article>
-
-                        <article class="carte">
-                            <figure class="carte-image">
-                                <img src="{{ asset }}/assets/images/img-catalogue/bahamas-stamp-11-queen-victoria-1863.jpg"
-                                    alt="Timbre Bahamas">
-                            </figure>
-                            <div class="carte-details">
-                                <h3 class="carte-titre">Timbre Bahamas #17 - Reine Victoria</h3>
-                                <p class="carte-prix">$445.00</p>
-                                <p class="offre">Ou meilleure offre</p>
-                                <nav class="carte-actions">
-                                    <button aria-label="Ajouter aux favoris"><i
-                                            class="fa-regular fa-heart"></i></button>
-                                    <button aria-label="Voir plus de détails"><i
-                                            class="fa-solid fa-arrow-right"></i></button>
-                                </nav>
-                            </div>
-                        </article>
-
-                        <article class="carte">
-                            <figure class="carte-image">
-                                <img src="{{ asset }}/assets/images/img-catalogue/timbre-de-canada-roi-georgeV.jpg"
-                                    alt="Timbres du Canada">
-                            </figure>
-                            <div class="carte-details">
-                                <h3 class="carte-titre">Timbres du Canada - Roi George V</h3>
-                                <p class="carte-prix">$15.90</p>
-                                <nav class="carte-actions">
-                                    <button aria-label="Ajouter aux favoris"><i
-                                            class="fa-regular fa-heart"></i></button>
-                                    <button aria-label="Voir plus de détails"><i
-                                            class="fa-solid fa-arrow-right"></i></button>
-                                </nav>
-                            </div>
-                        </article>
-
-                        <article class="carte">
-                            <figure class="carte-image">
-                                <img src="{{ asset }}/assets/images/img-catalogue/carnet-de-timbre-du-cananda.jpg"
-                                    alt="Carnet de Timbres">
-                            </figure>
-                            <div class="carte-details">
-                                <h3 class="carte-titre">Carnet de Timbres du Canada</h3>
-                                <p class="carte-prix">$54.95</p>
-                                <nav class="carte-actions">
-                                    <button aria-label="Ajouter aux favoris"><i
-                                            class="fa-regular fa-heart"></i></button>
-                                    <button aria-label="Voir plus de détails"><i
-                                            class="fa-solid fa-arrow-right"></i></button>
-                                </nav>
-                            </div>
-                        </article>
-
-                        <article class="carte">
-                            <figure class="carte-image">
-                                <img src="{{ asset }}/assets/images/img-catalogue/timbre-du-canada-castor.jpg" alt="Timbre Castor">
-                            </figure>
-                            <div class="carte-details">
-                                <h3 class="carte-titre">Timbre du Canada #4 - Castor</h3>
-                                <p class="carte-prix">$199.95</p>
-                                <p class="offre">Ou meilleure offre</p>
-                                <nav class="carte-actions">
-                                    <button aria-label="Ajouter aux favoris"><i
-                                            class="fa-regular fa-heart"></i></button>
-                                    <button aria-label="Voir plus de détails"><i
-                                            class="fa-solid fa-arrow-right"></i></button>
-                                </nav>
-                            </div>
-                        </article>
-
-                        <article class="carte">
-                            <span class="etiquette stock-info">Seulement 1 en stock</span>
-                            <figure class="carte-image">
-                                <img src="{{ asset }}/assets/images/img-catalogue/nova-scotia-stamp.jpg" alt="Timbre Angola">
-                            </figure>
-                            <div class="carte-details">
-                                <h3 class="carte-titre">Angola, 1870, SC 8a, Oblitéré</h3>
-                                <p class="carte-prix">$640.00</p>
-                                <p class="offre">Ou meilleure offre</p>
-                                <nav class="carte-actions">
-                                    <button aria-label="Ajouter aux favoris"><i
-                                            class="fa-regular fa-heart"></i></button>
-                                    <button aria-label="Voir plus de détails"><i
-                                            class="fa-solid fa-arrow-right"></i></button>
-                                </nav>
-                            </div>
-                        </article>
-
-                        <article class="carte">
-                            <figure class="carte-image">
-                                <img src="{{ asset }}/assets/images/img-catalogue/us-stamp-99-washington-24-1867.jpg"
-                                    alt="Timbre États-Unis">
-                            </figure>
-                            <div class="carte-details">
-                                <h3 class="carte-titre">États-Unis #C10, Neuf, jamais oblitéré</h3>
-                                <p class="carte-prix">$133.00</p>
-                                <p class="offre">Ou meilleure offre</p>
-                                <nav class="carte-actions">
-                                    <button aria-label="Ajouter aux favoris"><i
-                                            class="fa-regular fa-heart"></i></button>
-                                    <button aria-label="Voir plus de détails"><i
-                                            class="fa-solid fa-arrow-right"></i></button>
-                                </nav>
-                            </div>
-                        </article>
-                        <article class="carte">
-                            <figure class="carte-image">
-                                <img src="{{ asset }}/assets/images/img-catalogue/us-stamp-postage-issues.jpg"
-                                    alt="Timbre États-Unis">
-                            </figure>
-                            <div class="carte-details">
-                                <h3 class="carte-titre">Timbre de Nouvelle-Écosse #5 - Émission "Pence" (1857) 6d</h3>
-                                <p class="carte-prix">$177.00</p>
-                                <nav class="carte-actions">
-                                    <button aria-label="Ajouter aux favoris"><i
-                                            class="fa-regular fa-heart"></i></button>
-                                    <button aria-label="Voir plus de détails"><i
-                                            class="fa-solid fa-arrow-right"></i></button>
-                                </nav>
-                            </div>
-                        </article>
-                        <article class="carte">
-                            <figure class="carte-image">
-                                <img src="{{ asset }}/assets/images/img-catalogue/us-stamp-postage-issues-86-franklin-1-1867.jpg"
-                                    alt="Timbre États-Unis">
-                            </figure>
-                            <div class="carte-details">
-                                <h3 class="carte-titre">Timbre US #86 - Franklin (1867) 1¢
-                                    Gaufré E</h3>
-                                <p class="carte-prix">$120.00</p>
-                                <nav class="carte-actions">
-                                    <button aria-label="Ajouter aux favoris"><i
-                                            class="fa-regular fa-heart"></i></button>
-                                    <button aria-label="Voir plus de détails"><i
-                                            class="fa-solid fa-arrow-right"></i></button>
-                                </nav>
-                            </div>
-                        </article>
+                    {% else %}
+                        <p>Aucun timbre trouvé.</p>
+                    {% endfor %}
 
                 </div>
             </section>

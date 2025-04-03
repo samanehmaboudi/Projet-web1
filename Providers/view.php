@@ -7,9 +7,7 @@ use Twig\Environment;
 
 class View
 {
-    /**
-     * Rend une vue Twig avec données + variables globales
-     */
+    
     static public function render($template, $data = [])
     {
         
@@ -19,12 +17,12 @@ class View
             'debug' => true
         ]);
 
-        // Variables globales accessibles partout
+       
         $twig->addGlobal('asset', ASSET);   
         $twig->addGlobal('base', BASE);    
         $twig->addGlobal('session', $_SESSION); 
 
-        // Vérifie si l’utilisateur est un invité
+       
         $guest = true;
         if (
             isset($_SESSION['fingerPrint']) &&
@@ -38,9 +36,7 @@ class View
         echo $twig->render($template.".php", $data);
     }
 
-    /**
-     * Redirige vers une autre page
-     */
+    
     static public function redirect($url)
     {
         header('Location: ' . BASE . '/' . $url);

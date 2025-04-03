@@ -93,6 +93,27 @@
     padding: 0 var(--espace-moyen);
 }
 
+.lien-produit {
+    display: inline-block;
+    background-color: #b0975c;  /* couleur or */
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+}
+
+.lien-produit:hover {
+    background-color: #9e8650;  /* une version plus foncée */
+    color: #fff;
+}
+
+
+
+  
+
 /* Boutons Icônes */
 .carte-actions button {
     background: none;

@@ -11,9 +11,7 @@ class Validator
     private mixed $value;
     private string $name;
 
-    /**
-     * Définir un champ à valider
-     */
+   
     public function field( $key, $value, $name = null): static
     {
         $this->key = $key;
@@ -22,9 +20,7 @@ class Validator
         return $this;
     }
 
-    /**
-     * Vérifie que le champ est requis
-     */
+   
     public function required(): static
     {
         if (empty($this->value)) {
@@ -33,9 +29,7 @@ class Validator
         return $this;
     }
 
-    /**
-     * Vérifie la longueur maximale
-     */
+    
     public function max(int $length): static
     {
         if (strlen($this->value) > $length) {
@@ -44,9 +38,7 @@ class Validator
         return $this;
     }
 
-    /**
-     * Vérifie la longueur minimale
-     */
+   
     public function min(int $length): static
     {
         if (strlen($this->value) < $length) {
@@ -55,9 +47,7 @@ class Validator
         return $this;
     }
 
-    /**
-     * Vérifie que la valeur est un nombre
-     */
+    
     public function number(): static
     {
         if (!empty($this->value) && !is_numeric($this->value)) {
@@ -66,9 +56,7 @@ class Validator
         return $this;
     }
 
-    /**
-     * Vérifie que l'email est valide
-     */
+    
     public function email(): static
     {
         if (!empty($this->value) && !filter_var($this->value, FILTER_VALIDATE_EMAIL)) {
@@ -77,9 +65,8 @@ class Validator
         return $this;
     }
 
-    /**
-     * Vérifie l’unicité avec un modèle donné (ex: 'User')
-     */
+
+
     public function unique(string $model): static
     {
         $modelClass = 'App\\Models\\' . $model;
@@ -93,17 +80,11 @@ class Validator
         return $this;
     }
 
-    /**
-     * Retourne true si aucune erreur
-     */
     public function isSuccess(): bool
     {
         return empty($this->errors);
     }
 
-    /**
-     * Retourne les erreurs si échec
-     */
     public function getErrors(): array|null
     {
         return $this->isSuccess() ? null : $this->errors;

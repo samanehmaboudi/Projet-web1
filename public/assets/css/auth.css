@@ -148,9 +148,13 @@ input[type="password"] {
     transition: background 0.3s;
 }
 
+.btn-admin:hover {
+    background-color: #ebe1d1;
+}
+
 .btn:hover,
 .btn-connexion:hover {
-    background-color: #a0864f;
+    background-color: #ece7dd;
 }
 
 .btn.warning {

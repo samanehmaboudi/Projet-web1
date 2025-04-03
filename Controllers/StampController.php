@@ -1,76 +1,91 @@
-<?php
+<?php 
 
 namespace App\Controllers;
 
+use App\Models\Stamp;
 use App\Providers\View;
-use App\Models\Database;
 
 class StampController
 {
-    private $pdo;
-
-    public function __construct()
-    {
-       
-        $this->pdo = Database::getConnection();
-    }
-
-    /**
-     * Affiche la page de catalogue des produits (timbres)
-     */
     public function catalogue()
     {
-        session_start();
+        $model = new Stamp();
+        $stamps = $model->getAllWithImages();
 
-        
-        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-            $_SESSION['flash'] = "Veuillez vous connecter pour accéder au catalogue.";
-            header("Location: /login");
-            exit;
-        }
-
-       
         return View::render('pages/catalogueProduit', [
-            'session' => $_SESSION,
-            'asset' => ASSET
+            'stamps' => $stamps
         ]);
     }
 
-    
     public function ficheProduit()
     {
-        session_start();
-
-        // Vérification de l'utilisateur connecté
-        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-            $_SESSION['flash'] = "Connexion requise pour voir ce timbre.";
-            header("Location: /login");
-            exit;
+        if (!isset($_GET['id'])) {
+            return View::redirect('catalogue');
         }
-
-        // Récupérer l’ID depuis l’URL
-        $productId = $_GET['id'] ?? null;
-
-        if (!$productId) {
-            echo "Aucun produit sélectionné.";
-            return;
+    
+        $id = intval($_GET['id']);
+        $model = new Stamp();
+        $stamp = $model->findByIdWithImages($id);
+    
+        if (!$stamp) {
+            return View::redirect('catalogue');
         }
-
-        // Requête pour récupérer les données du timbre
-        $stmt = $this->pdo->prepare("SELECT * FROM stamp WHERE id = :id");
-        $stmt->execute(['id' => $productId]);
-        $produit = $stmt->fetch();
-
-        if (!$produit) {
-            echo "Produit non trouvé.";
-            return;
-        }
-
-        // Rendu de la fiche produit
+    
+        $relatedStamps = $model->getRelatedStamps($id);
+    
         return View::render('pages/fiche-produit', [
-            'produit' => $produit,
-            'asset' => ASSET,
-            'session' => $_SESSION
+            'stamp' => $stamp,
+            'relatedStamps' => $relatedStamps
         ]);
     }
+
+
+    public function create()
+    {
+        session_start();
+        if (!isset($_SESSION['loggedin']) || $_SESSION['privilege_id'] < 2) {
+            return View::redirect('login');
+        }
+    
+        return View::render('admin/stamps/create-stamp');
+    }
+
+    public function store()
+    {
+        session_start();
+    
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $model = new Stamp();
+    
+            $data = [
+                'name' => $_POST['name'],
+                'creationDate' => $_POST['creationDate'],
+                'user_id' => $_SESSION['user_id'],
+                'condition_id' => $_POST['condition_id'],
+                'country_id' => $_POST['country_id'],
+                'category_id' => $_POST['category_id'],
+                'color_id' => $_POST['color_id'],
+                'price' => $_POST['price']
+            ];
+    
+            $stampId = $model->create($data);
+    
+            // Traitement image
+            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                $filename = uniqid() . '-' . $_FILES['image']['name'];
+                $path = 'public/assets/images/uploads/' . $filename;
+                move_uploaded_file($_FILES['image']['tmp_name'], 'public/' . $path);
+    
+                $model->addImage($stampId, $path, 'Main');
+            }
+    
+            $_SESSION['flash'] = "Timbre ajouté avec succès !";
+            return View::redirect('catalogue');
+        }
+    
+        return View::redirect('admin/stamps/create-stamp');
+    }
+    
+    
+    
 }

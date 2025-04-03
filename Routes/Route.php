@@ -33,7 +33,6 @@ class Route
     {
         $uri = $_SERVER['PATH_INFO'] ?? '/';
         $path = explode("/",$uri)[1];
-             // Enlève le slash initial s'il existe
         $page = !empty( $path)? $path :'accueil';
 
        

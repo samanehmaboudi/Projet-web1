@@ -45,7 +45,7 @@
 }
 
 
-
+/* 
 .prix {
     font-size: 24px;
     font-weight: bold;
@@ -58,4 +58,18 @@
 .prix strong {
     color: brown;
     font-size: var(--taille-titre);
+} */
+
+
+p > .prix-important {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #b0975c;
+    margin-top: 10px;
 }
+
+p > .prix-important span {
+    font-size: 1.6rem;
+    color: #7b0303;
+}
+

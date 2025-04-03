@@ -7,6 +7,7 @@ use App\Providers\View;
 use App\Providers\Validator;
 
 
+
 class UserController
 {
     

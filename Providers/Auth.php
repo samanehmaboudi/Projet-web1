@@ -5,9 +5,7 @@ use App\Providers\View;
 
 class Auth
 {
-    /**
-     * Vérifie la session en comparant le fingerprint (agent + IP)
-     */
+
     public static function session()
     {
         if (isset($_SESSION['fingerPrint']) &&
@@ -21,6 +19,7 @@ class Auth
 
     public static function superadminOnly()
     {
+   
         if (
             !isset($_SESSION['privilege_id']) ||
             $_SESSION['privilege_id'] != 3
@@ -31,11 +30,6 @@ class Auth
     }
     
 
-    
-
-    /**
-     * Vérifie que l’utilisateur a le bon privilège (admin = 2, user = 1)
-     */
     public static function privilege($id)
     {
         if ($_SESSION['privilege_id'] == $id) {

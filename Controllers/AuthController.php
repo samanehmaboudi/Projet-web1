@@ -16,6 +16,9 @@ class AuthController
         
 
         if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+            if( isset($_SESSION['privilege_id']) && $_SESSION['privilege_id'] == 3){
+                return View::redirect('superadmin-dashboard');
+            }
             return View::redirect('welcome');
         }
 
@@ -45,8 +48,14 @@ class AuthController
                     $_SESSION["id"] = $user['id'];
                     $_SESSION["username"] = $user['name'];
                     $_SESSION["privilege"] = $user['user_privilege'];
+                    $_SESSION["privilege_id"] = $user['privilege_id'];
                     $_SESSION["fingerPrint"] = md5($_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR']);
 
+
+                    if( isset($_SESSION['privilege_id']) && $_SESSION['privilege_id'] == 3){
+                        return View::redirect('superadmin-dashboard');
+                    }
+                    
                     return View::redirect('welcome');
                 } else {
                     $data['login_err'] = "Email ou mot de passe invalide.";
@@ -61,7 +70,7 @@ class AuthController
     {
         $data = $this->getRegisterData();
 
-        //Si connecte, redirige vers welcome ou deconnecte
+
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $data = $this->handleRegistration($data, 'user');
         }
@@ -80,31 +89,33 @@ class AuthController
         return View::render('auth/register', $data);
     }
 
-    public function changePrivilege()
-{
-    session_start();
-
-    // Vérifier que l'utilisateur est connecté et est un admin
-    if (!isset($_SESSION["loggedin"]) || $_SESSION["privilege"] != 2) {
-        return View::redirect('login');
-    }
-
-    // Vérifie qu’un ID est passé dans l’URL (ex: ?id=3&role=admin)
-    $userId = $_GET['id'] ?? null;
-    $role = $_GET['role'] ?? null;
-
-    if ($userId && $role) {
-        $privilegeModel = new Privilege();
-        $roleData = $privilegeModel->getByName($role); 
-
-        if ($roleData) {
-            $userModel = new User();
-            $userModel->updatePrivilege((int) $userId, $roleData['id']);
+    public function changePrivilege() 
+    {
+        session_start();
+    
+        
+        if (!isset($_SESSION["loggedin"]) || $_SESSION["privilege_id"] < 2) {
+            return View::redirect('login');
         }
+    
+        
+        $userId = $_GET['id'] ?? null;
+        $role = $_GET['role'] ?? null;
+    
+        if ($userId && $role) {
+            $privilegeModel = new Privilege();
+            $roleData = $privilegeModel->getByName($role); 
+    
+            if ($roleData) {
+                $userModel = new User();
+                $userModel->updatePrivilege((int) $userId, (int) $roleData['id']);
+                $_SESSION['flash'] = "Le rôle a été mis à jour avec succès.";
+            }
+        }
+    
+        return View::redirect('admin-users');
     }
-
-    return View::redirect('admin-users'); 
-}
+    
 
 
     public function resetPassword()

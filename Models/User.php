@@ -1,73 +1,105 @@
-<?php
+<?php 
 
 namespace App\Models;
 
-use App\Models\CRUD;
 use App\Models\Database;
+use App\Models\CRUD;
 use PDO;
 
-class User extends CRUD
+class User
 {
-    protected string $table = 'User';
-    protected string $primaryKey = 'id';
-    protected array $fillable = ['name', 'email', 'password', 'privilege_id'];
+    private PDO $pdo;
 
     public function __construct()
     {
-        parent::__construct(Database::getConnection(), $this->table);
+        $this->pdo = Database::getConnection();
     }
 
-    public function hashPassword(string $password): string
+   
+    public function getAllWithPrivilege(): array
     {
-        return password_hash($password, PASSWORD_DEFAULT);
+        $sql = "
+            SELECT u.id, u.name, u.email, p.privilege AS role
+            FROM User u
+            LEFT JOIN Privilege AS p ON u.privilege_id = p.id
+        ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function checkUser(string $email, string $password): bool
+
+    public function updatePrivilege(int $userId, int $privilegeId): bool
     {
-        $user = $this->unique('email', $email);
-
-        if ($user && password_verify($password, $user['password'])) {
-            session_regenerate_id();
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['name'];
-            $_SESSION['privilege'] = $user['privilege_id'];
-            $_SESSION['fingerPrint'] = md5($_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR']);
-            return true;
-        }
-
-        return false;
+        $sql = "UPDATE User SET privilege_id = :privilege_id WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([
+            'privilege_id' => $privilegeId,
+            'id' => $userId
+        ]);
     }
 
-    public function findByEmail(string $email): array|false
-    {
-        $sql = "SELECT u.id, u.name, u.email, u.password, p.privilege AS user_privilege
-                FROM User u
-                LEFT JOIN Privilege p ON u.privilege_id = p.id
-                WHERE u.email = :email";
-
-        $stmt = Database::getConnection()->prepare($sql);
-        $stmt->execute([':email' => $email]);
-
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
 
     public function exists(string $email): bool
     {
-        $sql = "SELECT id FROM User WHERE email = :email";
-        $stmt = Database::getConnection()->prepare($sql);
-        $stmt->execute([':email' => $email]);
-        return $stmt->rowCount() > 0;
+        $stmt = $this->pdo->prepare("SELECT id FROM User WHERE email = :email LIMIT 1");
+        $stmt->execute(['email' => $email]);
+        return (bool) $stmt->fetch();
     }
 
-    public function create(array $data): bool
+    public function hashPassword($password): string
     {
-        $data['password'] = $this->hashPassword($data['password']);
-        return parent::create($data);
+        return password_hash($password, PASSWORD_DEFAULT);
     }
     
+    
 
-    public function updatePrivilege(int $id, int $privilege_id): bool
+   
+    public function findById(int $id): ?array
     {
-        return $this->update($id, ['privilege_id' => $privilege_id]);
+        $sql = "SELECT * FROM User WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
+
+   
+    public function findByEmail(string $email): ?array
+    {
+        $sql = "SELECT * FROM User WHERE email = :email";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['email' => $email]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
+
+    
+    public function create(array $data): bool
+    {
+        $sql = "
+            INSERT INTO User (name, email, password, privilege_id)
+            VALUES (:name, :email, :password, :privilege_id)
+        ";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute($data);
+    }
+
+    
+    public function update(int $id, array $data): bool
+    {
+        $sql = "
+            UPDATE User SET name = :name, email = :email, privilege_id = :privilege_id
+            WHERE id = :id
+        ";
+        $data['id'] = $id;
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute($data);
+    }
+
+ 
+    public function delete(int $id): bool
+    {
+        $sql = "DELETE FROM User WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute(['id' => $id]);
     }
 }
