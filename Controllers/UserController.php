@@ -53,7 +53,7 @@ class UserController
                 'privilege_id' => $_POST['privilege_id']
             ]);
 
-            return View::redirect('admin-users');
+            return View::redirect('admin/admin-users');
         } else {
             $errors = $validator->getErrors();
             return View::render('user/create', [
@@ -66,7 +66,9 @@ class UserController
     
     public function update()
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
         if (!isset($_SESSION['user_id'])) {
             return View::redirect('login');

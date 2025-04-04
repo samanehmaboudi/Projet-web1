@@ -34,6 +34,8 @@ Route::get('fiche-produit', 'StampController@ficheProduit');
 //Administration (privileges requis)
 Route::get('dashboard', 'AdminController@dashboard');
 Route::get('superadmin-dashboard', 'SuperAdminController@dashboard');
+Route::get('make-admin', 'AdminController@makeAdmin');
+
 
 Route::get('admin-users', 'AdminController@listUsers');
 Route::get('edit-user', 'AdminController@editUser');

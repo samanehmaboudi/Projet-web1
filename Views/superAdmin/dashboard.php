@@ -1,4 +1,4 @@
-{% include 'layouts/header.php' %}
+{% include 'layouts/header-auth.php' %}
 
 <main class="container-dashboard">
     <h2>SuperAdmin — Tableau de bord</h2>
@@ -11,4 +11,4 @@
     </ul>
 </main>
 
-{% include 'layouts/footer.php' %}
+{% include 'layouts/footer-auth.php' %}

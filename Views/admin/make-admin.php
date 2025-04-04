@@ -1,4 +1,4 @@
-{% include 'layouts/header.php' %}
+{% include 'layouts/header-auth.php' %}
 
 <main class="admin-promote-container">
     <h2 class="page-title">Promouvoir en administrateur</h2>
@@ -16,4 +16,4 @@
     </div>
 </main>
 
-{% include 'layouts/footer.php' %}
+{% include 'layouts/footer-auth.php' %}

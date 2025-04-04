@@ -8,7 +8,11 @@ class SuperAdminController
 {
     public function dashboard()
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+
         Auth::superadminOnly();
 
         return View::render('superadmin/dashboard', [

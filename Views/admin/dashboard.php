@@ -1,6 +1,6 @@
 
 
-{% include 'layouts/header.php' %}
+{% include 'layouts/header-auth.php' %}
 
 <main class="container-dashboard ">
     <h2>Tableau de bord Administrateur</h2>
@@ -13,4 +13,4 @@
     </ul>
 </main>
 
-{% include 'layouts/footer.php' %}
+{% include 'layouts/footer-auth.php' %}
