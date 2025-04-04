@@ -14,6 +14,8 @@ require_once __DIR__ . '/config.php';
 // Déclaration des routes
 require_once __DIR__ . '/Routes/web.php';
 
+// \App\Routes\Route::dispatch();
+
 // Exécuter la résolution de la route
 \App\Routes\Route::resolve();
 

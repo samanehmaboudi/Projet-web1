@@ -49,7 +49,7 @@ Route::get('user/create', 'UserController@create');
 Route::post('user/create', 'UserController@store');
 
 
-
+Route::get('admin-stamps', 'StampController@adminStamps');
 Route::get('create-stamp', 'StampController@create');
 Route::post('create-stamp', 'StampController@store');
 Route::get('create-stamp', 'StampController@create');
@@ -58,5 +58,6 @@ Route::get('edit-stamp', 'StampController@edit');
 Route::post('edit-stamp', 'StampController@update');
 Route::get('delete-stamp', 'StampController@delete');
 Route::get('show-stamp', 'StampController@show');
+
 
 

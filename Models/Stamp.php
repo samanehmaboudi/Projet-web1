@@ -15,16 +15,32 @@ class Stamp
     }
 
 
-    public function create(array $data): int
+    public function create(array $data): bool
     {
-        $sql = "INSERT INTO Stamp (name, creationDate, User_id, condition_id, country_id, category_id, color_id, price)
-                VALUES (:name, :creationDate, :user_id, :condition_id, :country_id, :category_id, :color_id, :price)";
+        $sql = "
+            INSERT INTO Stamp (name, creationDate, condition_id, country_id, category_id, color_id, user_id)
+            VALUES (:name, :creationDate, :condition_id, :country_id, :category_id, :color_id, :user_id)
+        ";
     
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($data);
-    
-        return $this->pdo->lastInsertId();
+        return $stmt->execute([
+            'name' => $data['name'],
+            'creationDate' => $data['creationDate'],
+            'condition_id' => $data['condition_id'],
+            'country_id' => $data['country_id'],
+            'category_id' => $data['category_id'],
+            'color_id' => $data['color_id'],
+            'user_id' => $data['user_id']
+        ]);
     }
+
+    public function delete(int $id): bool
+    {
+        $stmt = $this->pdo->prepare("DELETE FROM Stamp WHERE id = :id");
+        return $stmt->execute(['id' => $id]);
+    }
+    
+    
     
     public function addImage(int $stampId, string $url, string $type = 'Main'): void
     {
@@ -36,12 +52,30 @@ class Stamp
             'stamp_id' => $stampId
         ]);
     }
+
+    public function update(int $id, array $data): bool
+    {
+        $sql = "UPDATE Stamp 
+                SET name = :name, creationDate = :creationDate, 
+                    condition_id = :condition_id, country_id = :country_id, 
+                    category_id = :category_id, color_id = :color_id
+                WHERE id = :id";
+
+        $data['id'] = $id;
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute($data);
+    }
+
+    public function findById(int $id): ?array
+    {
+        $sql = "SELECT * FROM Stamp WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
     
-
-
-
-
-
+    
+    
 
 
     public function getAllWithImages(): array

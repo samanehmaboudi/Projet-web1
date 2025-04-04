@@ -1,34 +1,33 @@
 {% include 'layouts/header.php' %}
 
-<main class="container">
-    <h2>Modifier l’utilisateur</h2>
+<main class="admin-edit-container">
+    <h2 class="page-title">Modifier l'utilisateur</h2>
 
-    <form method="post">
+    <form method="post" class="form-edit-user">
         <div class="form-group">
             <label for="name">Nom :</label>
-            <input type="text" id="name" name="name" value="{{ user.name }}" required>
+            <input type="text" name="name" id="name" value="{{ user.name }}" required>
         </div>
 
         <div class="form-group">
-            <label for="email">Adresse e-mail :</label>
-            <input type="email" id="email" name="email" value="{{ user.email }}" required>
+            <label for="email">Email :</label>
+            <input type="email" name="email" id="email" value="{{ user.email }}" required>
         </div>
 
         <div class="form-group">
             <label for="role">Rôle :</label>
-            <select name="role" id="role">
-                {% for privilege in privileges %}
-                    <option value="{{ privilege.privilege }}"
-                        {% if privilege.privilege = user.role %}selected{% endif %}>
-                        {{ privilege.privilege|capitalize }}
+            <select name="role" id="role" required>
+                {% for p in privileges %}
+                    <option value="{{ p.id }}" {% if user.privilege_id == p.id %}selected{% endif %}>
+                        {{ p.privilege }}
                     </option>
                 {% endfor %}
             </select>
         </div>
 
-        <div class="form-group">
-            <button type="submit">Enregistrer</button>
-            <a href="{{ asset }}/admin-users">Retour</a>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Sauvegarder</button>
+            <a href="{{ base }}/admin-users" class="btn btn-secondary">Annuler</a>
         </div>
     </form>
 </main>

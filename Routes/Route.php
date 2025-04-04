@@ -5,10 +5,9 @@ namespace App\Routes;
 class Route
 {
     public static array $routes = [];
+    
 
-    /**
-     * Déclare une route GET
-     */
+    
     public static function get(string $page, string $callback): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {

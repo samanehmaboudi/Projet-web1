@@ -1,13 +1,13 @@
-/* Base */
+/* ===== Base ===== */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', sans-serif;
-    background-color: #1d2540; 
-    color: #fff; 
+    background-color: #1d2540;
+    color: #fff;
 }
 
-/* Navigation pour authentification */
+/* ===== Navigation (auth) ===== */
 nav {
     background-color: #a88d5e;
     padding: 15px 0;
@@ -18,6 +18,8 @@ nav {
     display: flex;
     justify-content: center;
     gap: 25px;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-auth li a {
@@ -33,7 +35,7 @@ nav {
     color: #4a3f2d;
 }
 
-/* Container */
+/* ===== Form Container ===== */
 .container {
     width: 100%;
     max-width: 400px;
@@ -42,17 +44,17 @@ nav {
     padding: 30px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    color: #222; 
+    color: #222;
 }
 
-/* Headings */
+/* ===== Headings ===== */
 h1, h2 {
     text-align: center;
     color: #1b2a49;
     margin-bottom: 20px;
 }
 
-/* Form styles */
+/* ===== Form Group ===== */
 .form-group {
     margin-bottom: 20px;
 }
@@ -63,7 +65,18 @@ label {
     font-weight: bold;
 }
 
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 
+/* ===== Admin Banner ===== */
 .admin-banner {
     background-color: #b0975c;
     color: #fff;
@@ -78,7 +91,7 @@ label {
     font-size: 1.1em;
 }
 
-a .btn-admin {
+.btn-admin {
     display: inline-block;
     margin-top: 10px;
     background-color: #fff;
@@ -91,19 +104,11 @@ a .btn-admin {
 }
 
 .btn-admin:hover {
-    background-color: #f1f1f1;
+    background-color: #ebe1d1;
+    color: #1d2540;
 }
 
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
+/* ===== Alerts / Messages ===== */
 .input-error {
     border-color: #cc0000;
 }
@@ -126,9 +131,10 @@ input[type="password"] {
     border: 1px solid #c3e6cb;
     color: #155724;
     border-radius: 5px;
+    margin-bottom: 20px;
 }
 
-/* Boutons */
+/* ===== Buttons ===== */
 .btn,
 .btn.warning,
 .btn.danger,
@@ -148,13 +154,10 @@ input[type="password"] {
     transition: background 0.3s;
 }
 
-.btn-admin:hover {
-    background-color: #ebe1d1;
-}
-
 .btn:hover,
 .btn-connexion:hover {
     background-color: #ece7dd;
+    color: #1d2540;
 }
 
 .btn.warning {
@@ -165,7 +168,7 @@ input[type="password"] {
     background-color: #d9534f;
 }
 
-/* Liens */
+/* ===== Links ===== */
 a {
     color: #222;
     text-decoration: none;
@@ -176,7 +179,7 @@ a:hover {
     color: #b0975c;
 }
 
-/* Footer Auth */
+/* ===== Footer ===== */
 .auth-footer {
     text-align: center;
     margin-top: 50px;

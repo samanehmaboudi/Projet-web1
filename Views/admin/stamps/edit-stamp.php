@@ -1,4 +1,4 @@
-{% include 'layouts/header.php' %}
+{% include 'layouts/header-auth.php' %}
 
 <main class="container">
     <h2>Modifier un timbre</h2>
@@ -42,4 +42,4 @@
     </form>
 </main>
 
-{% include 'layouts/footer.php' %}
+{% include 'layouts/footer-auth.php' %}

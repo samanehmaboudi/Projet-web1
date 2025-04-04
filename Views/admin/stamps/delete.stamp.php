@@ -1,4 +1,4 @@
-{% include 'layouts/header.php' %}
+{% include 'layouts/header-auth.php' %}
 
 <main class="container">
     <h2>Supprimer un timbre</h2>
@@ -7,8 +7,8 @@
 
     <form method="POST">
         <button type="submit" class="btn danger">Oui, supprimer</button>
-        <a href="{{ base }}/admin-stamps" class="btn">Annuler</a>
+        <a href="{{ base }}/admin-stamp" class="btn">Annuler</a>
     </form>
 </main>
 
-{% include 'layouts/footer.php' %}
+{% include 'layouts/footer-auth.php' %}

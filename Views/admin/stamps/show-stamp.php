@@ -1,4 +1,4 @@
-{% include 'layouts/header.php' %}
+{% include 'layouts/header-auth.php' %}
 
 <main class="container">
     <h2>Détails du timbre</h2>
@@ -20,4 +20,4 @@
     <a href="{{ base }}/delete-stamp?id={{ stamp.id }}" class="btn danger">Supprimer</a>
 </main>
 
-{% include 'layouts/footer.php' %}
+{% include 'layouts/footer-auth.php' %}

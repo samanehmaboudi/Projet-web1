@@ -60,7 +60,7 @@ class AdminController
                 'privilege_id' => $_POST['role']
             ]);
             $_SESSION['flash'] = "Utilisateur modifié.";
-            return View::redirect('admin-users');
+            return View::redirect('admin/admin-users');
         }
 
         $user = $userModel->findById($id);
@@ -85,7 +85,7 @@ class AdminController
             $model->update($id, ['privilege_id' => 2]);
         }
 
-        return View::redirect('admin-users');
+        return View::redirect('admin/admin-users');
     }
 
     public function deleteUser()
@@ -101,6 +101,6 @@ class AdminController
             $model->delete($id);
         }
 
-        return View::redirect('admin-users');
+        return View::redirect('admin/admin-users');
     }
 }
