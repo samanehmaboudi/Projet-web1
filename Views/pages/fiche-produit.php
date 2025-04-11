@@ -1,4 +1,4 @@
-{% include 'layouts/header.php' %}  
+{% include 'layouts/header.php' %}
 
 <main>
     <div class="contenu-principal">
@@ -12,7 +12,7 @@
                     <i class="fa-solid fa-heart icone-coeur"></i>
                     <div class="miniatures">
                         {% for img in stamp.images %}
-                            <img src="{{ asset }}/{{ img.image_url }}" alt="Miniature">
+                        <img src="{{ asset }}/{{ img.image_url }}" alt="Miniature">
                         {% endfor %}
                     </div>
                     {% set main = stamp.images[0] %}
@@ -33,12 +33,33 @@
                     </p>
                 </section>
 
-                <div class="section-mise">
-                    <label for="enchere" class="visually-hidden">Entrez votre enchère :</label>
-                    <input type="number" id="enchere" placeholder="Votre enchère">
-                    <button>Placer une enchère</button>
-                    <button class="bouton-annuler">Annuler</button>
+                <div id="form-mise-zone">
+                    {% if user %}
+                    <form method="POST" action="{{ base }}/enchere/miser" class="form-mise">
+                        <input type="hidden" name="auction_id" value="{{ stamp.auction_id }}">
+                        <label for="amount">💵 Votre mise (min. {{ minimum_bid }} $) :</label>
+                        <input type="number" name="amount" step="0.01" min="{{ minimum_bid }}" required>
+                        <button type="submit">✅ Placer ma mise</button>
+                    </form>
+                    {% else %}
+                    <p class="alert">⚠️ Connectez-vous pour pouvoir miser.</p>
+                    <a href="{{ base }}/login" class="btn-connect">Se connecter</a>
+                    {% endif %}
                 </div>
+
+                {% if bids %}
+                <div class="historique-mises">
+                    <h3>💬 Mises récentes</h3>
+                    <ul>
+                        {% for bid in bids %}
+                        <li>{{ bid.user_name }} a misé {{ bid.amount }} $ le {{ bid.date|date("d/m/Y H:i") }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% else %}
+                <p>Aucune mise pour l’instant. Soyez le premier à miser !</p>
+                {% endif %}
+
             </aside>
 
             <article class="details-produit">
@@ -51,7 +72,9 @@
                         <p><strong>Catégorie :</strong> {{ stamp.category_name }}</p>
                         <p><strong>Couleur :</strong> {{ stamp.color_name }}</p>
                         <p><strong>Année d'émission :</strong> {{ stamp.creationDate|date("Y") }}</p>
-                        <button class="badge-miser">Miser Maintenant</button>
+                        <button class="btn-ouvrir-formulaire" onclick="document.getElementById('form-mise-zone').scrollIntoView({behavior: 'smooth'})">
+                            Miser Maintenant
+                        </button>
                         <p class="prix-important"><strong> de départ :</strong> <span>${{ stamp.price }}</span></p>
 
                     </section>
@@ -72,9 +95,9 @@
         </div>
     </div>
     <section class="produits-relies">
-    <h2>Produits similaires</h2>
-    <div class="liste-produits">
-        {% for related in relatedStamps %}
+        <h2>Produits similaires</h2>
+        <div class="liste-produits">
+            {% for related in relatedStamps %}
             <article class="carte-produit">
                 <div class="image-produit">
                     <img src="{{ asset }}/{{ related.image_url }}" alt="{{ related.name }}">
@@ -88,14 +111,14 @@
                     <nav class="carte-actions">
                         <button aria-label="Ajouter aux favoris"><i class="fa-regular fa-heart"></i></button>
                         <button aria-label="Voir plus de détails"><i class="fa-solid fa-arrow-right"></i></button>
-                    </nav>        
+                    </nav>
                 </div>
             </article>
-        {% endfor %}
-    </div>
-</section>
+            {% endfor %}
+        </div>
+    </section>
 
-      
+
 </main>
 
 {% include 'layouts/footer.php' %}

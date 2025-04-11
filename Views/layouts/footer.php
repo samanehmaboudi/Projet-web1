@@ -43,10 +43,12 @@
         <!-- Contact -->
         <section class="footer-contact">
             <h3>Contactez-nous</h3>
-            <p><i class="fa-solid fa-envelope"></i> 
-                <a href="mailto:contact@lordstampee.com">contact@lordstampee.com</a></p>
-            <p><i class="fa-solid fa-phone"></i> 
-                <a href="tel:+15141234567">+1 (514) 123-4567</a></p>
+            <p><i class="fa-solid fa-envelope"></i>
+                <a href="mailto:contact@lordstampee.com">contact@lordstampee.com</a>
+            </p>
+            <p><i class="fa-solid fa-phone"></i>
+                <a href="tel:+15141234567">+1 (514) 123-4567</a>
+            </p>
             <div class="icones-sociaux">
                 <a href="https://www.facebook.com/votrepage" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
                 <a href="https://twitter.com/votreprofil" target="_blank"><i class="fa-brands fa-twitter"></i></a>
@@ -58,18 +60,21 @@
         <!-- Connexion / Déconnexion -->
         <div class="footer-connexion">
             {% if session.loggedin %}
-                <a href="{{ asset }}/logout" class="btn-connexion">Déconnexion</a>
+            <a href="{{ asset }}/logout" class="btn-connexion">Déconnexion</a>
             {% else %}
-                <a href="{{ asset }}/login" class="btn-connexion">Se Connecter</a>
+            <a href="{{ asset }}/login" class="btn-connexion">Se Connecter</a>
             {% endif %}
         </div>
     </div>
 
     <div class="footer-bas">
-    <p>Copyright © {{ "now"|date("Y") }} Lord Stampee. Tous droits réservés.</p>
+        <p>Copyright © {{ "now"|date("Y") }} Lord Stampee. Tous droits réservés.</p>
 
     </div>
 </footer>
+<script src="{{ asset }}/assets/js/filtrage.js"></script>
+
 
 </body>
+
 </html>

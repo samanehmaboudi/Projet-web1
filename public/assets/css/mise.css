@@ -1,31 +1,59 @@
 /* ========== SECTION MISE ========== */
-.section-mise {
-    display: flex;
-    gap: var(--espace-moyen);
-    margin-top: var(--espace-grand);
+.form-mise {
+    margin-top: 20px;
+    background-color: #fff7e6;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e5d8b0;
 }
 
-.section-mise input {
-    flex-grow: 1;
-    padding: var(--espace-moyen);
-    border: 1px solid var(--couleur-bordure);
-    border-radius: 5px;
-    font-size: var(--taille-texte);
+.form-mise label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #333;
 }
 
-.section-mise button {
-    padding: var(--espace-moyen);
-    background-color: var(--couleur-principale);
+.form-mise input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.form-mise button {
+    background-color: #4a3f2d;
     color: white;
     border: none;
-    border-radius: 5px;
+    padding: 10px 18px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: all 0.3s;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
-.section-mise button:hover {
-    background-color: var(--couleur-or);
-    color: black;
+.form-mise button:hover {
+    background-color: #b0975c;
+}
+
+.alert {
+    background-color: #fdecea;
+    color: #c62828;
+    border-left: 5px solid #ef5350;
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 20px;
+}
+
+.btn-connect {
+    display: inline-block;
+    margin-top: 10px;
+    color: #4a3f2d;
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 .bouton-annuler {

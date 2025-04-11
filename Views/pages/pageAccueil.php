@@ -9,6 +9,21 @@
             <a href="{{ base }}/dashboard" class="btn">Aller au tableau de bord</a>
         </div>
     {% else %}
+
+    {% if session.loggedin is defined and session.privilege_id >= 2 %}
+    <div class="btn-creer-timbre-container">
+        <a href="{{ base }}/create-stamp" class="btn-creer-timbre">
+            Créer un nouveau timbre
+        </a>
+    </div>
+    {% endif %}
+
+    {% if flash %}
+    <div class="alert-success">
+        {{ flash }}
+    </div>
+    {% endif %}
+
         <div class="user-message">
  
 

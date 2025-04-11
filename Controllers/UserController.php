@@ -11,24 +11,24 @@ use App\Providers\Validator;
 class UserController
 {
     
-    public function profil()
-    {
-        session_start();
+    // public function profil()
+    // {
+    //     session_start();
 
         
-        if (!isset($_SESSION['user_id'])) {
-            return View::redirect('login');
-        }
+    //     if (!isset($_SESSION['user_id'])) {
+    //         return View::redirect('login');
+    //     }
 
         
-        $userModel = new User();
-        $user = $userModel->find($_SESSION['user_id']);
+    //     $userModel = new User();
+    //     $user = $userModel->find($_SESSION['user_id']);
 
         
-        return View::render('user/profil', [
-            'user' => $user
-        ]);
-    }
+    //     return View::render('user/profil', [
+    //         'user' => $user
+    //     ]);
+    // }
 
 
     public function create()
@@ -53,7 +53,7 @@ class UserController
                 'privilege_id' => $_POST['privilege_id']
             ]);
 
-            return View::redirect('admin/admin-users');
+            return View::redirect('admin-users');
         } else {
             $errors = $validator->getErrors();
             return View::render('user/create', [
@@ -85,13 +85,8 @@ class UserController
             
             $userModel->update($_SESSION['user_id'], $updatedData);
 
-            return View::redirect('profil');
+            return View::redirect('login');
         }
-
-        // Si ce n'est pas un POST, on redirige
-        return View::redirect('profil');
     }
 
-    
-    
 }

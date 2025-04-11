@@ -15,24 +15,33 @@ class Stamp
     }
 
 
-    public function create(array $data): bool
+    public function createAndGetId(array $data): int
     {
-        $sql = "
-            INSERT INTO Stamp (name, creationDate, condition_id, country_id, category_id, color_id, user_id)
-            VALUES (:name, :creationDate, :condition_id, :country_id, :category_id, :color_id, :user_id)
-        ";
-    
+        $sql = "INSERT INTO Stamp (name, creationDate, condition_id, country_id, category_id, color_id, user_id, price, description)
+                VALUES (:name, :creationDate, :condition_id, :country_id, :category_id, :color_id, :user_id, :price, :description)";
+        
         $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([
-            'name' => $data['name'],
-            'creationDate' => $data['creationDate'],
-            'condition_id' => $data['condition_id'],
-            'country_id' => $data['country_id'],
-            'category_id' => $data['category_id'],
-            'color_id' => $data['color_id'],
-            'user_id' => $data['user_id']
+        $stmt->execute($data);
+        
+        return $this->pdo->lastInsertId();
+    }
+    
+    
+    
+    
+    
+    public function addImage(int $stampId, string $imagePath, string $type = 'Main')
+    {
+        $sql = "INSERT INTO Image (image_url, image_type, Stamp_id)
+                VALUES (:image_url, :image_type, :stamp_id)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'image_url' => $imagePath,
+            'image_type' => $type,
+            'stamp_id' => $stampId
         ]);
     }
+    
 
     public function delete(int $id): bool
     {
@@ -42,16 +51,6 @@ class Stamp
     
     
     
-    public function addImage(int $stampId, string $url, string $type = 'Main'): void
-    {
-        $sql = "INSERT INTO Image (image_url, image_type, Stamp_id) VALUES (:url, :type, :stamp_id)";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([
-            'url' => $url,
-            'type' => $type,
-            'stamp_id' => $stampId
-        ]);
-    }
 
     public function update(int $id, array $data): bool
     {
@@ -74,16 +73,12 @@ class Stamp
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
     
-    
-    
-
-
     public function getAllWithImages(): array
     {
         $sql = "SELECT s.id, s.name, s.creationDate, s.price, i.image_url
-        FROM Stamp s
-        LEFT JOIN Image i ON s.id = i.Stamp_id
-        WHERE i.image_type = 'Main'";
+                FROM Stamp s
+                LEFT JOIN Image i ON s.id = i.Stamp_id
+                WHERE i.image_type = 'Main'";
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();

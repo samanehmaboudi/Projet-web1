@@ -159,26 +159,31 @@
                 <h2>Collection de Timbres</h2>
                 <div class="catalogue-grid">
 
-                {% for stamp in stamps %}
-                        <article class="carte">
-                            <!-- <a href="{{ base }}/fiche-produit?id={{ stamp.id }}" class="lien-produit">Voir plus de détails</a> -->
-                            <figure class="carte-image">
-                                <img src="{{ asset }}/{{ stamp.image_url }}" alt="{{ stamp.name }}">
-                            </figure>
-                            <div class="carte-details">
-                                <h3 class="carte-titre">{{ stamp.name }}</h3>
-                                <p class="carte-prix">{{ stamp.price | number_format(2, '.', ' ') }} $</p>
+                    {% for stamp in stamps %}
+                    <article class="carte"
+                        data-pays="{{ stamp.country_name | lower }}"
+                        data-categorie="{{ stamp.category_name | lower }}"
+                        data-condition="{{ stamp.condition_name | lower }}"
+                        data-prix="{{ stamp.price }}"
+                        data-annee="{{ stamp.creationDate|date('Y') }}">
 
-                            </div>
-                            <nav class="carte-actions">
-                                <button aria-label="Ajouter aux favoris"><i class="fa-regular fa-heart"></i></button>
-                                <button class="btn-details" onclick="window.location.href='{{ base }}/fiche-produit?id={{ stamp.id }}'">
-                                   <i class="fa-solid fa-arrow-right"></i>
-                                </button>
-                            </nav>
-                        </article>
+                        <figure class="carte-image">
+                            <img src="{{ asset }}/{{ stamp.image_url }}" alt="{{ stamp.name }}">
+                        </figure>
+                        <div class="carte-details">
+                            <h3 class="carte-titre">{{ stamp.name }}</h3>
+                            <p class="carte-prix">{{ stamp.price | number_format(2, '.', ' ') }} $</p>
+
+                        </div>
+                        <nav class="carte-actions">
+                            <button aria-label="Ajouter aux favoris"><i class="fa-regular fa-heart"></i></button>
+                            <button class="btn-details" onclick="window.location.href='{{ base }}/fiche-produit?id={{ stamp.id }}'">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </nav>
+                    </article>
                     {% else %}
-                        <p>Aucun timbre trouvé.</p>
+                    <p>Aucun timbre trouvé.</p>
                     {% endfor %}
 
                 </div>

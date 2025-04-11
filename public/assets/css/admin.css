@@ -71,6 +71,136 @@ body.admin-body {
     background-color: #e74c3c;
 }
 
+.container-dashboard {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #fff;
+    color: #1d2540;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.container-dashboard h2 {
+    font-size: 28px;
+    color: #4a3f2d;
+    margin-bottom: 15px;
+}
+
+.container-dashboard p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.container-dashboard ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.container-dashboard ul li {
+    margin: 15px 0;
+}
+
+.container-dashboard ul li a {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #b0975c;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.container-dashboard ul li a:hover {
+    background-color: #927c48;
+}
+
+
+/* ===== admin-stamp ===== */
+.zone-gestion-timbres {
+    padding: 2rem;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.titre-gestion {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.bouton-ajout-timbre {
+    display: inline-block;
+    background-color: #4a3f2d;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.message-succes {
+    background-color: #d4edda;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.tableau-timbres {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableau-timbres th,
+.tableau-timbres td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+.ligne-timbre:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.miniature-timbre {
+    width: 100px;
+    height: auto;
+    border-radius: 4px;
+}
+
+.lien-modifier,
+.lien-supprimer {
+    text-decoration: none;
+    margin: 0 5px;
+    padding: 6px 10px;
+    border-radius: 5px;
+}
+
+.lien-modifier {
+    background-color: #0069d9;
+    color: white;
+}
+
+.lien-supprimer {
+    background-color: #c82333;
+    color: white;
+}
+
+.aucun-timbre {
+    color: #555;
+    font-style: italic;
+}
+
+
+
+
+
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
     .admin-table, .admin-table thead, .admin-table tbody, .admin-table th, .admin-table td, .admin-table tr {

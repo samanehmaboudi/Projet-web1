@@ -27,7 +27,7 @@ nav {
     color: #fff;
     padding: 8px 15px;
     border-radius: 4px;
-    transition: background 0.3s;
+    
 }
 
 .nav-auth li a:hover {
@@ -151,7 +151,7 @@ select {
     cursor: pointer;
     margin-top: 10px;
     text-decoration: none;
-    transition: background 0.3s;
+
 }
 
 .btn:hover,

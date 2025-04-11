@@ -13,7 +13,8 @@
         </div>
     {% endif %}
 
-    <form method="post" enctype="multipart/form-data" class="form-ajout-timbre">
+    <form method="POST" enctype="multipart/form-data" action="{{ base }}/create-stamp">
+        
         <label for="name">Nom du timbre :</label>
         <input type="text" name="name" id="name" required>
 
@@ -67,6 +68,7 @@
 
         <label for="images">Images (vous pouvez en sélectionner plusieurs) :</label>
         <input type="file" name="images[]" id="images" multiple accept="image/*" required>
+
 
         <input type="submit" value="Créer le timbre" class="btn btn-primary">
     </form>
